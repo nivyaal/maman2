@@ -27,5 +27,5 @@ class Stadium:
         return Stadium()
 
     def __str__(self):
-        print("stadiumID=" + str(self.__stadiumID) + ", capacity=" + str(self.__capacity) + ", belongs to=" + str(
+        return ("stadiumID=" + str(self.__stadiumID) + ", capacity=" + str(self.__capacity) + ", belongs to=" + str(
             self.__belongsTo))
