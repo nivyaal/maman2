@@ -370,7 +370,29 @@ def getStadiumProfile(stadiumID: int) -> Stadium:
 
 
 def deleteStadium(stadium: Stadium) -> ReturnValue:
-    pass
+    # TODO: Check cascading with InStadium
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "DELETE FROM Stadium WHERE StadiumID={id};") \
+            .format(id=sql.Literal(stadium.getStadiumID()))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.NOT_EXISTS if (rows_effected == 0) else ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.ERROR
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def playerScoredInMatch(match: Match, player: Player, amount: int) -> ReturnValue:

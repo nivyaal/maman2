@@ -47,6 +47,23 @@ if __name__ == '__main__':
 
     assert(getStadiumProfile(1).getStadiumID() is not None)
     assert(getStadiumProfile(2).getStadiumID() is not None)
-    assert(getStadiumProfile(3).getStadiumID() is  None)
+    assert(getStadiumProfile(3).getStadiumID() is None)
+
+    assert(deleteStadium(Stadium(1, None, None)) == ReturnValue.OK)
+    assert (deleteStadium(Stadium(3, None, None)) == ReturnValue.NOT_EXISTS)
+
+    assert(getStadiumProfile(1).getStadiumID() is None)
+    assert(getStadiumProfile(2).getStadiumID() is not None)
+    assert(getStadiumProfile(3).getStadiumID() is None)
+
+    assert(deleteStadium(Stadium(2, None, None)) == ReturnValue.OK)
+
+    assert(getStadiumProfile(1).getStadiumID() is None)
+    assert(getStadiumProfile(2).getStadiumID() is None)
+    assert(getStadiumProfile(3).getStadiumID() is None)
+
+    assert (deleteStadium(Stadium(1, None, None)) == ReturnValue.NOT_EXISTS)
+    assert (deleteStadium(Stadium(2, None, None)) == ReturnValue.NOT_EXISTS)
+    assert (deleteStadium(Stadium(3, None, None)) == ReturnValue.NOT_EXISTS)
 
     dropTables()
