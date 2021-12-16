@@ -36,13 +36,13 @@ def createTables():
 
         conn.execute("CREATE TABLE Match(MatchID INTEGER PRIMARY KEY CHECK(MatchID>0), "
                      "Competition VARCHAR(15) NOT NULL CHECK(Competition = 'International' OR  Competition = 'Domestic'), "
-                     "HomeTeamID INTEGER REFERENCES Team(TeamID) ON DELETE CASCADE,"
-                     "AwayTeamID INTEGER REFERENCES Team(TeamID) ON DELETE CASCADE,"
+                     "HomeTeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
+                     "AwayTeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
                      "CHECK(HomeTeamID <> AwayTeamID));")
 
         # TODO: not sure about null?
         conn.execute("CREATE TABLE Player(PlayerID INTEGER PRIMARY KEY CHECK(PlayerID>0),"
-                     "TeamID INTEGER REFERENCES Team(TeamID) ON DELETE CASCADE,"
+                     "TeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
                      "Age INTEGER CHECK (Age>0),"
                      "Height INTEGER CHECK (Height>0),"
                      "PreferredFoot VARCHAR(5) NOT NULL CHECK (PreferredFoot = 'Left' OR PreferredFoot = 'Right'));")
@@ -50,14 +50,14 @@ def createTables():
         # TODO: for each team only one stadium is allowed
         conn.execute("CREATE TABLE Stadium(StadiumID INTEGER PRIMARY KEY CHECK(StadiumID>0),"
                      "Capacity INTEGER CHECK(Capacity>0),"
-                     "BelongTo INTEGER NULL REFERENCES Team(TeamID) ON DELETE CASCADE);")  # TODO: Verify CASCADE.
+                     "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")  # TODO: Verify CASCADE.
 
-        conn.execute("CREATE TABLE InStadium(MatchID INTEGER PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
-                     "StadiumID INTEGER REFERENCES Stadium(StadiumID) ON DELETE CASCADE,"
+        conn.execute("CREATE TABLE InStadium(MatchID INTEGER NOT NULL PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
+                     "StadiumID INTEGER NOT NULL REFERENCES Stadium(StadiumID) ON DELETE CASCADE,"
                      "Attendance INTEGER CHECK(Attendance>=0));")
 
-        conn.execute("CREATE TABLE ScoreIn(MatchID INTEGER REFERENCES Match(MatchID) ON DELETE CASCADE,"
-                     "PlayerID INTEGER REFERENCES Player(PlayerID) ON DELETE CASCADE,"
+        conn.execute("CREATE TABLE ScoreIn(MatchID INTEGER NOT NULL REFERENCES Match(MatchID) ON DELETE CASCADE,"
+                     "PlayerID INTEGER NOT NULL REFERENCES Player(PlayerID) ON DELETE CASCADE,"
                      "Amount INTEGER CHECK(Amount>0),"
                      "PRIMARY KEY(MatchID, PlayerID));")
 
@@ -158,7 +158,7 @@ def addMatch(match: Match) -> ReturnValue:
     conn = None
     try:
         conn = Connector.DBConnector()
-        query = sql.SQL("INSERT INTO Match(MatchID, Competition, HomeTeamID, AwayTeamID) VALUES({id}, {comp}, {home}, {away})")\
+        query = sql.SQL("INSERT INTO Match(MatchID, Competition, HomeTeamID, AwayTeamID) VALUES({id}, {comp}, {home}, {away});")\
             .format(id=sql.Literal(match.getMatchID()), comp=sql.Literal(match.getCompetition()),
                     home=sql.Literal(match.getHomeTeamID()), away=sql.Literal(match.getAwayTeamID()))
         rows_effected, _ = conn.execute(query)
@@ -233,7 +233,7 @@ def addPlayer(player: Player) -> ReturnValue:
     try:
         conn = Connector.DBConnector()
         query = sql.SQL(
-            "INSERT INTO Player(PlayerID, TeamID, Age, Height, PreferredFoot) VALUES({id}, {team}, {age}, {height}, {foot})") \
+            "INSERT INTO Player(PlayerID, TeamID, Age, Height, PreferredFoot) VALUES({id}, {team}, {age}, {height}, {foot});") \
             .format(id=sql.Literal(player.getPlayerID()), team=sql.Literal(player.getTeamID()),
                     age=sql.Literal(player.getAge()), height=sql.Literal(player.getHeight()), foot=sql.Literal(player.getFoot()))
         rows_effected, _ = conn.execute(query)
@@ -305,7 +305,29 @@ def deletePlayer(player: Player) -> ReturnValue:
 
 
 def addStadium(stadium: Stadium) -> ReturnValue:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "INSERT INTO Stadium(StadiumID, Capacity, BelongTo) VALUES({id}, {cap}, {belong});") \
+            .format(id=sql.Literal(stadium.getStadiumID()), cap=sql.Literal(stadium.getCapacity()),
+                    belong=sql.Literal(stadium.getBelongsTo()))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ALREADY_EXISTS
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def getStadiumProfile(stadiumID: int) -> Stadium:

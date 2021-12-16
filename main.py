@@ -1,17 +1,8 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from Solution import *
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+
     dropTables()
     createTables()
 
@@ -20,6 +11,7 @@ if __name__ == '__main__':
     print(addTeam(1))
     print(addTeam(2))
     print(addTeam(1))
+    print(addMatch(Match(1, 'Domestic', 1, None)))
     print(addMatch(Match(1, None, 1, 2)))
     print(addMatch(Match(1, 'Domestic', 1, 2)))
     print(getMatchProfile(1))
@@ -46,10 +38,9 @@ if __name__ == '__main__':
     print(getPlayerProfile(6))
     print(getPlayerProfile(7))
 
+    print(addStadium(Stadium(1, 1000, 1)))
+    print(addStadium(Stadium(2, 1000, 2)))
+    print(addStadium(Stadium(3, 1000, 1)))
+    print(addStadium(Stadium(2, 1000, 1)))
+
     dropTables()
-
-
-    #dropTables()
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
