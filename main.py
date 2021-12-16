@@ -29,6 +29,13 @@ if __name__ == '__main__':
     print(deleteMatch(Match(1, None, None, None)))
     print(deleteMatch(Match(-1, None, None, None)))
     print(deleteMatch(Match(22, None, None, None)))
+
+    print(addPlayer(Player(5, 1, 15, 100, 'Left')))
+    print(addPlayer(Player(6, 3, 15, 100, 'Left')))
+    print(addPlayer(Player(6, 1, 15, 100, 'Left')))
+
+    dropTables()
+
     # print_hi('PyCharm')
 
 

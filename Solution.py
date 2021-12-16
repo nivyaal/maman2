@@ -165,7 +165,6 @@ def addMatch(match: Match) -> ReturnValue:
     except DatabaseException.FOREIGN_KEY_VIOLATION as e:
         return ReturnValue.BAD_PARAMS
     except Exception as e:
-        print(e)
         return ReturnValue.ERROR
     finally:
         conn.close()
@@ -221,7 +220,29 @@ def deleteMatch(match: Match) -> ReturnValue:
 
 
 def addPlayer(player: Player) -> ReturnValue:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "INSERT INTO Player(PlayerID, TeamID, Age, Height, PreferredFoot) VALUES({id}, {team}, {age}, {height}, {foot})") \
+            .format(id=sql.Literal(player.getPlayerID()), team=sql.Literal(player.getTeamID()),
+                    age=sql.Literal(player.getAge()), height=sql.Literal(player.getHeight()), foot=sql.Literal(player.getFoot()))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ALREADY_EXISTS
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def getPlayerProfile(playerID: int) -> Player:
