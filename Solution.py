@@ -28,6 +28,15 @@ def toPlayer(dict: ResultSetDict) -> Player:
     return Player(dict['playerid'], dict['teamid'], dict['age'], dict['height'], dict['preferredfoot'])
 
 
+def toStadium(dict: ResultSetDict) -> Stadium:
+    """
+    Converts a result set dictionary to a stadium type
+    :param dict: the result set dictionary
+    :return: a stadium object with the corresponding values
+    """
+    return Stadium(dict['stadiumid'], dict['capacity'], dict['belongto'])
+
+
 def createTables():
     conn = None
     try:
@@ -185,6 +194,8 @@ def getMatchProfile(matchID: int) -> Match:
         conn = Connector.DBConnector()
         query = sql.SQL("SELECT * FROM Match WHERE MatchID = {id};").format(id=sql.Literal(matchID))
         rows_effected, result = conn.execute(query)
+        if result.size() == 0:
+            return Match.badMatch()
         assert(result.size() == 1)
         return toMatch(result[0])
     except DatabaseException.ConnectionInvalid as e:
@@ -260,6 +271,8 @@ def getPlayerProfile(playerID: int) -> Player:
         conn = Connector.DBConnector()
         query = sql.SQL("SELECT * FROM Player WHERE PlayerID = {id};").format(id=sql.Literal(playerID))
         rows_effected, result = conn.execute(query)
+        if result.size() == 0:
+            return Player.badPlayer()
         assert (result.size() == 1)
         return toPlayer(result[0])
     except DatabaseException.ConnectionInvalid as e:
@@ -331,7 +344,29 @@ def addStadium(stadium: Stadium) -> ReturnValue:
 
 
 def getStadiumProfile(stadiumID: int) -> Stadium:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL("SELECT * FROM Stadium WHERE StadiumID = {id};").format(id=sql.Literal(stadiumID))
+        rows_effected, result = conn.execute(query)
+        if result.size() == 0:
+            return Stadium.badStadium()
+        assert (result.size() == 1)
+        return toStadium(result[0])
+    except DatabaseException.ConnectionInvalid as e:
+        return Stadium.badStadium()
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.CHECK_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return Stadium.badStadium()
+    except Exception as e:
+        return Stadium.badStadium()
+    finally:
+        conn.close()
 
 
 def deleteStadium(stadium: Stadium) -> ReturnValue:
