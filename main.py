@@ -32,11 +32,21 @@ if __name__ == '__main__':
 
     print(addPlayer(Player(5, 1, 15, 100, 'Left')))
     print(addPlayer(Player(6, 3, 15, 100, 'Left')))
-    print(addPlayer(Player(6, 1, 15, 100, 'Left')))
+    print(addPlayer(Player(6, 1, 25, 10, 'Right')))
+    print(addPlayer(Player(7, 2, 15, 10, 'Right')))
+    print(getPlayerProfile(5))
+    print(getPlayerProfile(6))
+    print(getPlayerProfile(7))
+    print(deletePlayer(Player(6, None, None, None, None)))
+    print(getPlayerProfile(5))
+    print(getPlayerProfile(6))
+    print(getPlayerProfile(7))
+    print(deletePlayer(Player(6, None, None, None, None)))
+    print(getPlayerProfile(5))
+    print(getPlayerProfile(6))
+    print(getPlayerProfile(7))
 
     dropTables()
-
-    # print_hi('PyCharm')
 
 
     #dropTables()

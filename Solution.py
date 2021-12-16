@@ -19,6 +19,15 @@ def toMatch(dict: ResultSetDict) -> Match:
     return Match(dict['matchid'], dict['competition'], dict['hometeamid'], dict['awayteamid'])
 
 
+def toPlayer(dict: ResultSetDict) -> Player:
+    """
+    Converts a result set dictionary to a player type
+    :param dict: the result set dictionary
+    :return: a player object with the corresponding values
+    """
+    return Player(dict['playerid'], dict['teamid'], dict['age'], dict['height'], dict['preferredfoot'])
+
+
 def createTables():
     conn = None
     try:
@@ -246,11 +255,53 @@ def addPlayer(player: Player) -> ReturnValue:
 
 
 def getPlayerProfile(playerID: int) -> Player:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL("SELECT * FROM Player WHERE PlayerID = {id};").format(id=sql.Literal(playerID))
+        rows_effected, result = conn.execute(query)
+        assert (result.size() == 1)
+        return toPlayer(result[0])
+    except DatabaseException.ConnectionInvalid as e:
+        return Player.badPlayer()
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return Player.badPlayer()
+    except DatabaseException.CHECK_VIOLATION as e:
+        return Player.badPlayer()
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return Player.badPlayer()
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return Player.badPlayer()
+    except Exception as e:
+        return Player.badPlayer()
+    finally:
+        conn.close()
 
 
 def deletePlayer(player: Player) -> ReturnValue:
-    pass
+    # TODO: Check cascading with ScoreIn
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "DELETE FROM Player WHERE PlayerID={id};") \
+            .format(id=sql.Literal(player.getPlayerID()))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.NOT_EXISTS if (rows_effected == 0) else ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.ERROR
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def addStadium(stadium: Stadium) -> ReturnValue:
