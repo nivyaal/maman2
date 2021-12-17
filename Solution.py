@@ -473,7 +473,28 @@ def matchInStadium(match: Match, stadium: Stadium, attendance: int) -> ReturnVal
 
 
 def matchNotInStadium(match: Match, stadium: Stadium) -> ReturnValue:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "DELETE FROM InStadium WHERE MatchID={matchid} AND StadiumID={stadiumid};") \
+            .format(matchid=sql.Literal(match.getMatchID()), stadiumid=sql.Literal(stadium.getStadiumID()))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.NOT_EXISTS if (rows_effected == 0) else ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ERROR
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.ERROR
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def averageAttendanceInStadium(stadiumID: int) -> float:
