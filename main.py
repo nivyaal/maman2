@@ -82,4 +82,14 @@ if __name__ == '__main__':
     assert (playerDidntScoreInMatch(Match(1, None, None, None), Player(5)) == ReturnValue.OK)
     assert (playerDidntScoreInMatch(Match(3, None, None, None), Player(5)) == ReturnValue.NOT_EXISTS)
 
+    assert (addStadium(Stadium(1, 1000, 1)) == ReturnValue.OK)
+    assert (addStadium(Stadium(2, 3000, None)) == ReturnValue.OK)
+
+    assert (matchInStadium(Match(1, None, None, None), Stadium(1, None, None), 500) == ReturnValue.OK)
+    assert (matchInStadium(Match(1, None, None, None), Stadium(2, None, None), 500) == ReturnValue.ALREADY_EXISTS)
+    assert (matchInStadium(Match(2, None, None, None), Stadium(2, None, None), -1) == ReturnValue.BAD_PARAMS)
+    assert (matchInStadium(Match(2, None, None, None), Stadium(3, None, None), 0) == ReturnValue.NOT_EXISTS)
+    assert (matchInStadium(Match(2, None, None, None), Stadium(1, None, None), 0) == ReturnValue.OK)
+    assert (matchInStadium(Match(3, None, None, None), Stadium(1, None, None), 0) == ReturnValue.NOT_EXISTS)
+
     # dropTables()

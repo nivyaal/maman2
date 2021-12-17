@@ -447,7 +447,29 @@ def playerDidntScoreInMatch(match: Match, player: Player) -> ReturnValue:
 
 
 def matchInStadium(match: Match, stadium: Stadium, attendance: int) -> ReturnValue:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "INSERT INTO InStadium(MatchID, StadiumID, Attendance) VALUES({matchid}, {stadiumid}, {attend});") \
+            .format(matchid=sql.Literal(match.getMatchID()), stadiumid=sql.Literal(stadium.getStadiumID()),
+                    attend=sql.Literal(attendance))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ALREADY_EXISTS
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.NOT_EXISTS
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def matchNotInStadium(match: Match, stadium: Stadium) -> ReturnValue:
