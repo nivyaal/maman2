@@ -16,7 +16,7 @@ if __name__ == '__main__':
     assert(addMatch(Match(1, 'Domestic', 1, 2)) == ReturnValue.OK)
 
     assert(getMatchProfile(1).getMatchID() is not None)
-    assert (getMatchProfile(-1).getMatchID() is None)
+    assert(getMatchProfile(-1).getMatchID() is None)
     assert(getMatchProfile(2) .getMatchID() is None)
 
     assert(deleteMatch(Match(1, None, None, None)) == ReturnValue.OK)
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     assert(addPlayer(Player(6, 3, 15, 100, 'Left')) == ReturnValue.BAD_PARAMS)
     assert(addPlayer(Player(6, 1, 25, 10, 'Right')) == ReturnValue.OK)
     assert(addPlayer(Player(7, 2, 15, 10, 'Right')) == ReturnValue.OK)
-    assert (addPlayer(Player(7, 1, 15, 10, 'Right')) == ReturnValue.ALREADY_EXISTS)
+    assert(addPlayer(Player(7, 1, 15, 10, 'Right')) == ReturnValue.ALREADY_EXISTS)
     assert(getPlayerProfile(5).getPlayerID() is not None)
     assert(getPlayerProfile(6).getPlayerID() is not None)
     assert(getPlayerProfile(7).getPlayerID() is not None)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     assert(getStadiumProfile(3).getStadiumID() is None)
 
     assert(deleteStadium(Stadium(1, None, None)) == ReturnValue.OK)
-    assert (deleteStadium(Stadium(3, None, None)) == ReturnValue.NOT_EXISTS)
+    assert(deleteStadium(Stadium(3, None, None)) == ReturnValue.NOT_EXISTS)
 
     assert(getStadiumProfile(1).getStadiumID() is None)
     assert(getStadiumProfile(2).getStadiumID() is not None)
@@ -66,4 +66,17 @@ if __name__ == '__main__':
     assert (deleteStadium(Stadium(2, None, None)) == ReturnValue.NOT_EXISTS)
     assert (deleteStadium(Stadium(3, None, None)) == ReturnValue.NOT_EXISTS)
 
-    dropTables()
+    assert(addMatch(Match(1, 'International', 1, 2)) == ReturnValue.OK)
+    assert (addMatch(Match(2, 'International', 1, 2)) == ReturnValue.OK)
+
+    assert(playerScoredInMatch(Match(1, None, None, None), Player(5), 15) == ReturnValue.OK)
+
+    assert (playerScoredInMatch(Match(1, None, None, None), Player(5), 30) == ReturnValue.ALREADY_EXISTS)
+
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(5), -5) == ReturnValue.BAD_PARAMS)
+
+    assert (playerScoredInMatch(Match(3, None, None, None), Player(5), 5) == ReturnValue.NOT_EXISTS)
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(6), 5) == ReturnValue.NOT_EXISTS)
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(5), 5) == ReturnValue.OK)
+
+    # dropTables()

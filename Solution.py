@@ -396,7 +396,29 @@ def deleteStadium(stadium: Stadium) -> ReturnValue:
 
 
 def playerScoredInMatch(match: Match, player: Player, amount: int) -> ReturnValue:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL(
+            "INSERT INTO ScoreIn(MatchID, PlayerID, Amount) VALUES({matchid}, {playerid}, {amnt});") \
+            .format(matchid=sql.Literal(match.getMatchID()), playerid=sql.Literal(player.getPlayerID()),
+                    amnt=sql.Literal(amount))
+        rows_effected, _ = conn.execute(query)
+        return ReturnValue.OK
+    except DatabaseException.ConnectionInvalid as e:
+        return ReturnValue.ERROR
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.CHECK_VIOLATION as e:
+        return ReturnValue.BAD_PARAMS
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return ReturnValue.ALREADY_EXISTS
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return ReturnValue.NOT_EXISTS
+    except Exception as e:
+        return ReturnValue.ERROR
+    finally:
+        conn.close()
 
 
 def playerDidntScoreInMatch(match: Match, player: Player) -> ReturnValue:
