@@ -79,4 +79,7 @@ if __name__ == '__main__':
     assert (playerScoredInMatch(Match(2, None, None, None), Player(6), 5) == ReturnValue.NOT_EXISTS)
     assert (playerScoredInMatch(Match(2, None, None, None), Player(5), 5) == ReturnValue.OK)
 
+    assert (playerDidntScoreInMatch(Match(1, None, None, None), Player(5)) == ReturnValue.OK)
+    assert (playerDidntScoreInMatch(Match(3, None, None, None), Player(5)) == ReturnValue.NOT_EXISTS)
+
     # dropTables()
