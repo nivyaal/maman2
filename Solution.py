@@ -498,7 +498,26 @@ def matchNotInStadium(match: Match, stadium: Stadium) -> ReturnValue:
 
 
 def averageAttendanceInStadium(stadiumID: int) -> float:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL("SELECT AVG(Attendance) FROM InStadium WHERE StadiumID = {id};").format(id=sql.Literal(stadiumID))
+        _, result = conn.execute(query)
+        return result[0]['avg'] if result[0]['avg'] is not None else 0
+    except DatabaseException.ConnectionInvalid as e:
+        return Stadium.badStadium()
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.CHECK_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return Stadium.badStadium()
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return Stadium.badStadium()
+    except Exception as e:
+        return Stadium.badStadium()
+    finally:
+        conn.close()
 
 
 def stadiumTotalGoals(stadiumID: int) -> int:

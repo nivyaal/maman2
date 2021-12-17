@@ -100,4 +100,8 @@ if __name__ == '__main__':
 
     assert (matchInStadium(Match(2, None, None, None), Stadium(2, None, None), 300) == ReturnValue.OK)
 
+    assert(averageAttendanceInStadium(1) == 500)
+    assert(averageAttendanceInStadium(2) == 300)
+    assert(averageAttendanceInStadium(3) == 0)
+
     # dropTables()
