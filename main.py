@@ -184,4 +184,20 @@ if __name__ == '__main__':
     assert(getActiveTallTeams() == [2, 1])
     assert(getActiveTallRichTeams() == [1])
 
+    assert (addMatch(Match(5, 'Domestic', 5, 2)) == ReturnValue.OK)
+    assert (addMatch(Match(6, 'Domestic', 3, 5)) == ReturnValue.OK)
+    assert (addMatch(Match(7, 'Domestic', 5, 4)) == ReturnValue.OK)
+
+    assert (matchInStadium(Match(5, None, None, None), Stadium(1, None, None), 45000) == ReturnValue.OK)
+    assert (matchInStadium(Match(6, None, None, None), Stadium(1, None, None), 3000) == ReturnValue.OK)
+    assert (matchInStadium(Match(7, None, None, None), Stadium(1, None, None), 50000) == ReturnValue.OK)
+    assert (popularTeams() == [5])
+
+
+
+
+
+
+
+
     dropTables()

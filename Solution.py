@@ -607,6 +607,8 @@ def getActiveTallTeams() -> List[int]:
     finally:
         conn.close()
 
+#TODO: possible to create a view from the query above without limit and order and then add the condition
+#TODO: adding the adjusted second version of the query form above?
 
 def getActiveTallRichTeams() -> List[int]:
     conn = None
@@ -639,7 +641,31 @@ def getActiveTallRichTeams() -> List[int]:
 
 
 def popularTeams() -> List[int]:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL \
+            ("SELECT HomeTeamID FROM Match AS M "
+            "INNER JOIN InStadium AS I ON M.MatchID = I.MatchID "
+            "GROUP BY M.HomeTeamID "
+            "HAVING MIN(I.Attendance)>40000 "
+            "ORDER BY M.HomeTeamID DESC LIMIT 10;")
+        _, result = conn.execute(query)
+        return ([result[i]['hometeamid'] for i in range(result.size())])
+    except DatabaseException.ConnectionInvalid as e:
+        return []
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return []
+    except DatabaseException.CHECK_VIOLATION as e:
+        return []
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return []
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return []
+    except Exception as e:
+        return []
+    finally:
+        conn.close()
 
 
 def getMostAttractiveStadiums() -> List[int]:
