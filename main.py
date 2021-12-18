@@ -81,6 +81,10 @@ if __name__ == '__main__':
 
     assert (playerDidntScoreInMatch(Match(1, None, None, None), Player(5)) == ReturnValue.OK)
     assert (playerDidntScoreInMatch(Match(3, None, None, None), Player(5)) == ReturnValue.NOT_EXISTS)
+    assert (playerDidntScoreInMatch(Match(1, None, None, None), Player(50)) == ReturnValue.NOT_EXISTS)
+    assert (playerDidntScoreInMatch(Match(1, None, None, None), Player(7)) == ReturnValue.NOT_EXISTS)
+
+
 
     assert (addStadium(Stadium(1, 1000, 1)) == ReturnValue.OK)
     assert (addStadium(Stadium(2, 3000, None)) == ReturnValue.OK)
