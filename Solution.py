@@ -61,6 +61,7 @@ def createTables():
                      "Capacity INTEGER CHECK(Capacity>0),"
                      "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")  # TODO: Verify CASCADE.
 
+        #TODO: if a match was conducted in a stadium and the stadium was deleted the match should be deleted
         conn.execute("CREATE TABLE InStadium(MatchID INTEGER NOT NULL PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
                      "StadiumID INTEGER NOT NULL REFERENCES Stadium(StadiumID) ON DELETE CASCADE,"
                      "Attendance INTEGER CHECK(Attendance>=0));")
@@ -607,7 +608,7 @@ def getActiveTallTeams() -> List[int]:
     finally:
         conn.close()
 
-#TODO: possible to create a view from the query above without limit and order and then add the condition
+#TODO: possible to create a view of getActiveTallTeams without limit and order and then add the condition
 #TODO: adding the adjusted second version of the query form above?
 
 def getActiveTallRichTeams() -> List[int]:
@@ -668,8 +669,33 @@ def popularTeams() -> List[int]:
         conn.close()
 
 
+# TODO: possible to add view of  stadiumTotalGoals
+# TODO: if no goals in the stadium i placed 0 for no
 def getMostAttractiveStadiums() -> List[int]:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL \
+            ("SELECT S.StadiumID ,COALESCE((SELECT SUM(Amount) FROM ScoreIn WHERE MatchID IN "
+ 				                            "(SELECT MatchID FROM InStadium WHERE StadiumID = S.StadiumID)), 0) AS Goals "
+            "FROM Stadium S "
+            "ORDER BY Goals DESC, S.StadiumID ASC; ")
+        _, result = conn.execute(query)
+        return ([result[i]['stadiumid'] for i in range(result.size())])
+    except DatabaseException.ConnectionInvalid as e:
+        return []
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return []
+    except DatabaseException.CHECK_VIOLATION as e:
+        return []
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return []
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return []
+    except Exception as e:
+        return []
+    finally:
+        conn.close()
 
 
 def mostGoalsForTeam(teamID: int) -> List[int]:

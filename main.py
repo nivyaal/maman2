@@ -193,6 +193,11 @@ if __name__ == '__main__':
     assert (matchInStadium(Match(7, None, None, None), Stadium(1, None, None), 50000) == ReturnValue.OK)
     assert (popularTeams() == [5])
 
+    assert (addStadium(Stadium(3, 30000, 2)) == ReturnValue.OK)
+
+    stadiumsGoals = [stadiumTotalGoals(1), stadiumTotalGoals(2), stadiumTotalGoals(3)]
+    assert (getMostAttractiveStadiums() == [2, 1, 3])
+
 
 
 
