@@ -104,4 +104,65 @@ if __name__ == '__main__':
     assert(averageAttendanceInStadium(2) == 300)
     assert(averageAttendanceInStadium(3) == 0)
 
+    clearTables()
+
+    assert (addTeam(1) == ReturnValue.OK)
+    assert (addTeam(2) == ReturnValue.OK)
+    assert (addTeam(3) == ReturnValue.OK)
+    assert (addTeam(4) == ReturnValue.OK)
+
+    assert (addPlayer(Player(10, 1, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(11, 1, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(12, 1, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(13, 1, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(20, 2, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(21, 2, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(22, 2, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(23, 2, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(30, 3, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(31, 3, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(32, 3, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(33, 3, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(40, 4, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(41, 4, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(42, 4, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(43, 4, 5, 5, 'Left')) == ReturnValue.OK)
+
+    assert (addMatch(Match(1, 'Domestic', 1, 2)) == ReturnValue.OK)
+    assert (addMatch(Match(2, 'Domestic', 3, 4)) == ReturnValue.OK)
+    assert (addMatch(Match(3, 'Domestic', 1, 4)) == ReturnValue.OK)
+    assert (addMatch(Match(4, 'Domestic', 2, 3)) == ReturnValue.OK)
+
+    assert (addStadium(Stadium(1, 1100, None)) == ReturnValue.OK)
+    assert (addStadium(Stadium(2, 1200, None)) == ReturnValue.OK)
+
+    assert (matchInStadium(Match(1, None, None, None), Stadium(1, None, None), 510) == ReturnValue.OK)
+    assert (matchInStadium(Match(2, None, None, None), Stadium(1, None, None), 520) == ReturnValue.OK)
+    assert (matchInStadium(Match(3, None, None, None), Stadium(1, None, None), 530) == ReturnValue.OK)
+    assert (matchInStadium(Match(4, None, None, None), Stadium(2, None, None), 540) == ReturnValue.OK)
+
+    # 15 pts in M1
+    assert (playerScoredInMatch(Match(1, None, None, None), Player(10, None, None, None, None), 5) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(1, None, None, None), Player(11, None, None, None, None), 4) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(1, None, None, None), Player(12, None, None, None, None), 6) == ReturnValue.OK)
+
+    # 30 pts in M2
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(20, None, None, None, None), 10) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(21, None, None, None, None), 8) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(2, None, None, None), Player(22, None, None, None, None), 12) == ReturnValue.OK)
+
+    # 60 pts in M3
+    assert (playerScoredInMatch(Match(3, None, None, None), Player(30, None, None, None, None), 20) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(3, None, None, None), Player(31, None, None, None, None), 16) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(3, None, None, None), Player(32, None, None, None, None), 24) == ReturnValue.OK)
+
+    # 120 pts in M4
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(40, None, None, None, None), 40) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(41, None, None, None, None), 32) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(42, None, None, None, None), 48) == ReturnValue.OK)
+
+    assert (stadiumTotalGoals(1) == 105)
+    assert (stadiumTotalGoals(2) == 120)
+    assert (stadiumTotalGoals(3) == 0)
+
     # dropTables()

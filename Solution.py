@@ -505,23 +505,44 @@ def averageAttendanceInStadium(stadiumID: int) -> float:
         _, result = conn.execute(query)
         return result[0]['avg'] if result[0]['avg'] is not None else 0
     except DatabaseException.ConnectionInvalid as e:
-        return Stadium.badStadium()
+        return -1
     except DatabaseException.NOT_NULL_VIOLATION as e:
-        return Stadium.badStadium()
+        return -1
     except DatabaseException.CHECK_VIOLATION as e:
-        return Stadium.badStadium()
+        return -1
     except DatabaseException.UNIQUE_VIOLATION as e:
-        return Stadium.badStadium()
+        return -1
     except DatabaseException.FOREIGN_KEY_VIOLATION as e:
-        return Stadium.badStadium()
+        return -1
     except Exception as e:
-        return Stadium.badStadium()
+        return -1
     finally:
         conn.close()
 
 
 def stadiumTotalGoals(stadiumID: int) -> int:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL\
+            ("SELECT SUM(Amount) FROM ScoreIn WHERE MatchID IN "
+             "(SELECT MatchID FROM InStadium WHERE StadiumID = {id});").format(id=sql.Literal(stadiumID))
+        _, result = conn.execute(query)
+        return result[0]['sum'] if result[0]['sum'] is not None else 0
+    except DatabaseException.ConnectionInvalid as e:
+        return -1
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return -1
+    except DatabaseException.CHECK_VIOLATION as e:
+        return -1
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return -1
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return -1
+    except Exception as e:
+        return -1
+    finally:
+        conn.close()
 
 
 def playerIsWinner(playerID: int, matchID: int) -> bool:
