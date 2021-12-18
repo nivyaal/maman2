@@ -575,7 +575,6 @@ def getActiveTallTeams() -> List[int]:
     conn = None
     try:
         conn = Connector.DBConnector()
-        # query = "SELECT * FROM (SELECT COUNT(PlayerID), TeamID FROM Player WHERE (Height > 190) GROUP BY TeamID)"
         query = sql.SQL\
             ("SELECT * FROM (SELECT TeamID FROM Team WHERE "
              "(TeamID IN (SELECT HomeTeamID FROM Match) OR TeamID IN (SELECT AwayTeamID FROM Match)) AND "  # active
@@ -596,7 +595,6 @@ def getActiveTallTeams() -> List[int]:
     except DatabaseException.FOREIGN_KEY_VIOLATION as e:
         return []
     except Exception as e:
-        print(e)
         return []
     finally:
         conn.close()
@@ -607,25 +605,27 @@ def getActiveTallRichTeams() -> List[int]:
     try:
         conn = Connector.DBConnector()
         query = sql.SQL \
-            ("SELECT TOP 5 * FROM (SELECT TeamID FROM Team WHERE "
+            ("SELECT * FROM (SELECT TeamID FROM Team WHERE "
              "(TeamID IN (SELECT HomeTeamID FROM Match) OR TeamID IN (SELECT AwayTeamID FROM Match)) AND "  # active
              "(TeamID IN (SELECT BelongTo FROM Stadium WHERE Capacity > 55000)) AND "  # rich
-             "((SELECT COUNT(PlayerID) FROM Player WHERE ((Height > 190) AND (TeamID=TeamID))) >= 2)"  # tall
-             "ORDER BY TeamID ASC);")
+             "TeamID IN (SELECT TeamID FROM ("
+             "SELECT COUNT(PlayerID), TeamID FROM Player WHERE (Height > 190) GROUP BY TeamID) AS TallPlayers"
+             " WHERE count >= 2)"  # tall
+             "ORDER BY TeamID DESC) AS TeamID LIMIT 5;")
         _, result = conn.execute(query)
-        print('hi')
+        return ([result[i]['teamid'] for i in range(result.size())])
     except DatabaseException.ConnectionInvalid as e:
-        return False
+        return []
     except DatabaseException.NOT_NULL_VIOLATION as e:
-        return False
+        return []
     except DatabaseException.CHECK_VIOLATION as e:
-        return False
+        return []
     except DatabaseException.UNIQUE_VIOLATION as e:
-        return False
+        return []
     except DatabaseException.FOREIGN_KEY_VIOLATION as e:
-        return False
+        return []
     except Exception as e:
-        return False
+        return []
     finally:
         conn.close()
 

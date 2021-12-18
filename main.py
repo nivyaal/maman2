@@ -136,7 +136,7 @@ if __name__ == '__main__':
     assert (addMatch(Match(3, 'Domestic', 1, 4)) == ReturnValue.OK)
     assert (addMatch(Match(4, 'Domestic', 2, 3)) == ReturnValue.OK)
 
-    assert (addStadium(Stadium(1, 1100, None)) == ReturnValue.OK)
+    assert (addStadium(Stadium(1, 60000, 1)) == ReturnValue.OK)
     assert (addStadium(Stadium(2, 1200, None)) == ReturnValue.OK)
 
     assert (matchInStadium(Match(1, None, None, None), Stadium(1, None, None), 510) == ReturnValue.OK)
@@ -178,5 +178,6 @@ if __name__ == '__main__':
     assert (playerIsWinner(41, 40) == False)
 
     assert(getActiveTallTeams() == [2, 1])
+    assert(getActiveTallRichTeams() == [1])
 
-    # dropTables()
+    dropTables()
