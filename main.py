@@ -157,12 +157,21 @@ if __name__ == '__main__':
     assert (playerScoredInMatch(Match(3, None, None, None), Player(32, None, None, None, None), 24) == ReturnValue.OK)
 
     # 120 pts in M4
-    assert (playerScoredInMatch(Match(4, None, None, None), Player(40, None, None, None, None), 40) == ReturnValue.OK)
-    assert (playerScoredInMatch(Match(4, None, None, None), Player(41, None, None, None, None), 32) == ReturnValue.OK)
-    assert (playerScoredInMatch(Match(4, None, None, None), Player(42, None, None, None, None), 48) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(40, None, None, None, None), 20) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(41, None, None, None, None), 40) == ReturnValue.OK)
+    assert (playerScoredInMatch(Match(4, None, None, None), Player(30, None, None, None, None), 60) == ReturnValue.OK)
 
     assert (stadiumTotalGoals(1) == 105)
     assert (stadiumTotalGoals(2) == 120)
     assert (stadiumTotalGoals(3) == 0)
+
+    assert (playerIsWinner(30, 4) == True)
+    assert (playerIsWinner(30, 3) == False)
+    assert (playerIsWinner(40, 4) == False)
+    assert (playerIsWinner(41, 4) == False)
+
+    assert (playerIsWinner(45, 4) == False)
+    assert (playerIsWinner(45, 40) == False)
+    assert (playerIsWinner(41, 40) == False)
 
     # dropTables()

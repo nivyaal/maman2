@@ -546,7 +546,29 @@ def stadiumTotalGoals(stadiumID: int) -> int:
 
 
 def playerIsWinner(playerID: int, matchID: int) -> bool:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL\
+            ("SELECT * FROM ScoreIn WHERE PlayerID={pid} AND MatchID={mid} AND Amount >="
+             "0.5*(SELECT SUM(Amount) FROM ScoreIn WHERE MatchID={mid});").\
+            format(pid=sql.Literal(playerID), mid=sql.Literal(matchID))
+        _, result = conn.execute(query)
+        return True if result.size() == 1 else False
+    except DatabaseException.ConnectionInvalid as e:
+        return False
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return False
+    except DatabaseException.CHECK_VIOLATION as e:
+        return False
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return False
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return False
+    except Exception as e:
+        return False
+    finally:
+        conn.close()
 
 
 def getActiveTallTeams() -> List[int]:
