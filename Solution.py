@@ -670,7 +670,8 @@ def popularTeams() -> List[int]:
 
 
 # TODO: possible to add view of  stadiumTotalGoals
-# TODO: if no goals in the stadium i placed 0 for no
+# TODO: if no goals in the stadium i placed 0 for now
+# TODO: for all advanced querys need to check what is the value we put in case the list is not full
 def getMostAttractiveStadiums() -> List[int]:
     conn = None
     try:
@@ -698,8 +699,33 @@ def getMostAttractiveStadiums() -> List[int]:
         conn.close()
 
 
+# TODO: if some of the five best didnt score at all i placed 0 for now
+# TODO: didnt checked will be checked in tests but similier to getMostAttractiveStadiums
 def mostGoalsForTeam(teamID: int) -> List[int]:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL \
+            ("SELECT P.PlayerID ,COALESCE((SELECT SUM(Amount) FROM ScoreIn WHERE PlayerID = P.PlayerID), 0) AS Goals "
+             "FROM Player P WHERE P.PlayerID IN (SELECT PlayerID FROM Player WHERE TeamID = {tid}) "
+             "ORDER BY Goals DESC, P.PlayerID ASC LIMIT 5;").\
+            format(tid=sql.Literal(teamID))
+        _, result = conn.execute(query)
+        return ([result[i]['playerid'] for i in range(result.size())])
+    except DatabaseException.ConnectionInvalid as e:
+        return []
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return []
+    except DatabaseException.CHECK_VIOLATION as e:
+        return []
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return []
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return []
+    except Exception as e:
+        return []
+    finally:
+        conn.close()
 
 
 def getClosePlayers(playerID: int) -> List[int]:
