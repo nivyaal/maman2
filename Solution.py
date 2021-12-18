@@ -727,6 +727,33 @@ def mostGoalsForTeam(teamID: int) -> List[int]:
     finally:
         conn.close()
 
-
+# TODO: NOT CHECKED YET
+# TODO: maybe we should use views here
 def getClosePlayers(playerID: int) -> List[int]:
-    pass
+    conn = None
+    try:
+        conn = Connector.DBConnector()
+        query = sql.SQL \
+            ("SELECT P.PlayerID FROM Player AS P "
+            "WHERE P.PlayerID <> {pid} "
+            "AND ((SELECT COUNT(*) FROM ScoreIn WHERE PlayerID = {pid}) *0.5 "
+        	"< (SELECT COUNT(*) FROM ((SELECT MatchID FROM ScoreIn WHERE PlayerID = {pid}) "
+							  "INTERSECT(SELECT MatchID FROM ScoreIn WHERE PlayerID = P.PlayerID)) AS X)) "
+            "ORDER BY P.PlayerID ASC LIMIT 10;"). \
+            format(pid=sql.Literal(playerID))
+        _, result = conn.execute(query)
+        return ([result[i]['playerid'] for i in range(result.size())])
+    except DatabaseException.ConnectionInvalid as e:
+        return []
+    except DatabaseException.NOT_NULL_VIOLATION as e:
+        return []
+    except DatabaseException.CHECK_VIOLATION as e:
+        return []
+    except DatabaseException.UNIQUE_VIOLATION as e:
+        return []
+    except DatabaseException.FOREIGN_KEY_VIOLATION as e:
+        return []
+    except Exception as e:
+        return []
+    finally:
+        conn.close()
