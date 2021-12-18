@@ -611,7 +611,7 @@ def getActiveTallRichTeams() -> List[int]:
              "TeamID IN (SELECT TeamID FROM ("
              "SELECT COUNT(PlayerID), TeamID FROM Player WHERE (Height > 190) GROUP BY TeamID) AS TallPlayers"
              " WHERE count >= 2)"  # tall
-             "ORDER BY TeamID DESC) AS TeamID LIMIT 5;")
+             "ORDER BY TeamID ASC) AS TeamID LIMIT 5;")
         _, result = conn.execute(query)
         return ([result[i]['teamid'] for i in range(result.size())])
     except DatabaseException.ConnectionInvalid as e:
