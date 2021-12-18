@@ -110,13 +110,14 @@ if __name__ == '__main__':
     assert (addTeam(2) == ReturnValue.OK)
     assert (addTeam(3) == ReturnValue.OK)
     assert (addTeam(4) == ReturnValue.OK)
+    assert (addTeam(5) == ReturnValue.OK)
 
-    assert (addPlayer(Player(10, 1, 5, 5, 'Left')) == ReturnValue.OK)
-    assert (addPlayer(Player(11, 1, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(10, 1, 5, 200, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(11, 1, 5, 200, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(12, 1, 5, 5, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(13, 1, 5, 5, 'Left')) == ReturnValue.OK)
-    assert (addPlayer(Player(20, 2, 5, 5, 'Left')) == ReturnValue.OK)
-    assert (addPlayer(Player(21, 2, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(20, 2, 5, 200, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(21, 2, 5, 191, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(22, 2, 5, 5, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(23, 2, 5, 5, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(30, 3, 5, 5, 'Left')) == ReturnValue.OK)
@@ -127,6 +128,8 @@ if __name__ == '__main__':
     assert (addPlayer(Player(41, 4, 5, 5, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(42, 4, 5, 5, 'Left')) == ReturnValue.OK)
     assert (addPlayer(Player(43, 4, 5, 5, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(50, 5, 5, 200, 'Left')) == ReturnValue.OK)
+    assert (addPlayer(Player(51, 5, 5, 200, 'Left')) == ReturnValue.OK)
 
     assert (addMatch(Match(1, 'Domestic', 1, 2)) == ReturnValue.OK)
     assert (addMatch(Match(2, 'Domestic', 3, 4)) == ReturnValue.OK)
@@ -173,5 +176,7 @@ if __name__ == '__main__':
     assert (playerIsWinner(45, 4) == False)
     assert (playerIsWinner(45, 40) == False)
     assert (playerIsWinner(41, 40) == False)
+
+    assert(getActiveTallTeams() == [2, 1])
 
     # dropTables()
