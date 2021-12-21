@@ -36,7 +36,6 @@ def toStadium(dict: ResultSetDict) -> Stadium:
     """
     return Stadium(dict['stadiumid'], dict['capacity'], dict['belongto'])
 
-#TODO: add views
 def createTables():
     conn = None
     try:
@@ -127,7 +126,6 @@ def clearTables():
     finally:
         conn.close()
 
-#TODO: add drop view
 def dropTables():
     conn = None
     try:
