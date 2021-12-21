@@ -34,5 +34,5 @@ class Match:
         return Match()
 
     def __str__(self):
-        return ("MatchID=" + str(self.__matchID) + ", competition=" + str(self.__competition) + ", home team=" + str(
+        print("MatchID=" + str(self.__matchID) + ", competition=" + str(self.__competition) + ", home team=" + str(
             self.__homeTeamID) + ", away team=" + str(self.__awayTeamID))

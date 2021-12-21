@@ -41,5 +41,5 @@ class Player:
         return Player()
 
     def __str__(self):
-        return ("PlayerID=" + str(self.__playerID) + ", TeamID=" + str(self.__teamID) + ", age=" + str(self.__age)
+        print("PlayerID=" + str(self.__playerID) + ", TeamID=" + str(self.__teamID) + ", age=" + str(self.__age)
               + ", height=" + str(self.__height) + ", foot=" + str(self.__foot))
