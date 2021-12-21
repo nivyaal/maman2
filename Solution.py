@@ -36,7 +36,7 @@ def toStadium(dict: ResultSetDict) -> Stadium:
     """
     return Stadium(dict['stadiumid'], dict['capacity'], dict['belongto'])
 
-
+#TODO: add views
 def createTables():
     conn = None
     try:
@@ -59,7 +59,7 @@ def createTables():
                      "Capacity INTEGER NOT NULL CHECK(Capacity>0),"
                      "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")
 
-        #TODO: if a match was conducted in a stadium and the stadium was deleted the match should be deleted
+#TODO: should we check home team and belongs to are related?
         conn.execute("CREATE TABLE InStadium(MatchID INTEGER NOT NULL PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
                      "StadiumID INTEGER NOT NULL REFERENCES Stadium(StadiumID) ON DELETE CASCADE,"
                      "Attendance INTEGER NOT NULL CHECK(Attendance>=0));")
@@ -212,7 +212,6 @@ def getMatchProfile(matchID: int) -> Match:
     finally:
         conn.close()
 
-#TODO: should delete all the match attributes?
 def deleteMatch(match: Match) -> ReturnValue:
     conn = None
     try:
@@ -494,6 +493,7 @@ def matchNotInStadium(match: Match, stadium: Stadium) -> ReturnValue:
         conn.close()
 
 
+#TODO: use coalesce
 def averageAttendanceInStadium(stadiumID: int) -> float:
     conn = None
     try:
@@ -516,7 +516,7 @@ def averageAttendanceInStadium(stadiumID: int) -> float:
     finally:
         conn.close()
 
-
+#TODO: use coalesce
 def stadiumTotalGoals(stadiumID: int) -> int:
     conn = None
     try:
@@ -636,7 +636,7 @@ def getActiveTallRichTeams() -> List[int]:
     finally:
         conn.close()
 
-
+#TODO: what about temas who didnt played as hometeams
 def popularTeams() -> List[int]:
     conn = None
     try:
