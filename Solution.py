@@ -69,6 +69,11 @@ def createTables():
                      "Amount INTEGER NOT NULL CHECK(Amount>0),"
                      "PRIMARY KEY(MatchID, PlayerID));")
 
+        conn.execute("CREATE VIEW ActiveTallTeams as "
+                     "SELECT TeamID FROM Player WHERE Height>190 "
+                     "GROUP BY TeamID "
+                     "Having COUNT(PlayerID) >= 2 AND TeamID IN ((SELECT HomeTeamID FROM Match) UNION (SELECT AwayTeamID FROM Match));")
+
     except DatabaseException.ConnectionInvalid as e:
         print(e)
     except DatabaseException.NOT_NULL_VIOLATION as e:
@@ -111,7 +116,7 @@ def clearTables():
     finally:
         conn.close()
 
-
+#TODO: add drop view
 def dropTables():
     conn = None
     try:
@@ -493,7 +498,6 @@ def matchNotInStadium(match: Match, stadium: Stadium) -> ReturnValue:
         conn.close()
 
 
-#TODO: use coalesce
 def averageAttendanceInStadium(stadiumID: int) -> float:
     conn = None
     try:
@@ -516,7 +520,7 @@ def averageAttendanceInStadium(stadiumID: int) -> float:
     finally:
         conn.close()
 
-#TODO: use coalesce
+
 def stadiumTotalGoals(stadiumID: int) -> int:
     conn = None
     try:
@@ -525,7 +529,7 @@ def stadiumTotalGoals(stadiumID: int) -> int:
             ("SELECT COALESCE(SUM(Amount),0) AS goals FROM ScoreIn WHERE MatchID IN "
              "(SELECT MatchID FROM InStadium WHERE StadiumID = {id});").format(id=sql.Literal(stadiumID))
         _, result = conn.execute(query)
-        return result[0]['goals'] #if result[0]['sum'] is not None else 0
+        return result[0]['goals']
     except DatabaseException.ConnectionInvalid as e:
         return -1
     except DatabaseException.NOT_NULL_VIOLATION as e:
@@ -568,25 +572,16 @@ def playerIsWinner(playerID: int, matchID: int) -> bool:
         conn.close()
 
 
+#TODO: create a view
 def getActiveTallTeams() -> List[int]:
     conn = None
     try:
         conn = Connector.DBConnector()
 
         query = sql.SQL \
-            ("SELECT TeamID FROM Player WHERE Height>190 "
-            "GROUP BY TeamID "
-            "Having COUNT(PlayerID) >= 2 AND TeamID IN ((SELECT HomeTeamID FROM Match) UNION (SELECT AwayTeamID FROM Match)) "
+            ("SELECT TeamID FROM ActiveTallTeams "
             "ORDER BY TeamID DESC LIMIT 5;")
 
-
-        # query = sql.SQL\
-        #     ("SELECT * FROM (SELECT TeamID FROM Team WHERE "
-        #      "(TeamID IN (SELECT HomeTeamID FROM Match) OR TeamID IN (SELECT AwayTeamID FROM Match)) AND "  # active
-        #      "TeamID IN (SELECT TeamID FROM ("
-        #      "SELECT COUNT(PlayerID), TeamID FROM Player WHERE (Height > 190) GROUP BY TeamID) AS TallPlayers"
-        #      " WHERE count >= 2)"  # tall
-        #      "ORDER BY TeamID DESC) AS TeamID LIMIT 5;")
         _, result = conn.execute(query)
         return ([result[i]['teamid'] for i in range(result.size())])
     except DatabaseException.ConnectionInvalid as e:
@@ -607,18 +602,16 @@ def getActiveTallTeams() -> List[int]:
 #TODO: possible to create a view of getActiveTallTeams without limit and order and then add the condition
 #TODO: adding the adjusted second version of the query form above?
 
+#TODO: use view from prev func
 def getActiveTallRichTeams() -> List[int]:
     conn = None
     try:
         conn = Connector.DBConnector()
         query = sql.SQL \
-            ("SELECT * FROM (SELECT TeamID FROM Team WHERE "
-             "(TeamID IN (SELECT HomeTeamID FROM Match) OR TeamID IN (SELECT AwayTeamID FROM Match)) AND "  # active
-             "(TeamID IN (SELECT BelongTo FROM Stadium WHERE Capacity > 55000)) AND "  # rich
-             "TeamID IN (SELECT TeamID FROM ("
-             "SELECT COUNT(PlayerID), TeamID FROM Player WHERE (Height > 190) GROUP BY TeamID) AS TallPlayers"
-             " WHERE count >= 2)"  # tall
-             "ORDER BY TeamID ASC) AS TeamID LIMIT 5;")
+            ("SELECT TeamID FROM ActiveTallTeams "
+             "WHERE TeamID IN (SELECT BelongTo FROM Stadium WHERE Capacity > 55000) "
+             "ORDER BY TeamID ASC LIMIT 5;")
+
         _, result = conn.execute(query)
         return ([result[i]['teamid'] for i in range(result.size())])
     except DatabaseException.ConnectionInvalid as e:
@@ -665,7 +658,7 @@ def popularTeams() -> List[int]:
         conn.close()
 
 
-# TODO: possible to add view of  stadiumTotalGoals
+# TODO: use view from stadium total goals
 def getMostAttractiveStadiums() -> List[int]:
     conn = None
     try:
@@ -719,7 +712,7 @@ def mostGoalsForTeam(teamID: int) -> List[int]:
     finally:
         conn.close()
 
-# TODO: maybe we should use views here
+# TODO: creating views
 def getClosePlayers(playerID: int) -> List[int]:
     conn = None
     try:
