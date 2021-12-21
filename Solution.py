@@ -49,17 +49,15 @@ def createTables():
                      "AwayTeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
                      "CHECK(HomeTeamID <> AwayTeamID));")
 
-        # TODO: not sure about null?
         conn.execute("CREATE TABLE Player(PlayerID INTEGER PRIMARY KEY CHECK(PlayerID>0),"
                      "TeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
                      "Age INTEGER NOT NULL CHECK (Age>0),"
                      "Height INTEGER NOT NULL CHECK (Height>0),"
                      "PreferredFoot VARCHAR(5) NOT NULL CHECK (PreferredFoot = 'Left' OR PreferredFoot = 'Right'));")
 
-        # TODO: for each team only one stadium is allowed
         conn.execute("CREATE TABLE Stadium(StadiumID INTEGER PRIMARY KEY CHECK(StadiumID>0),"
                      "Capacity INTEGER NOT NULL CHECK(Capacity>0),"
-                     "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")  # TODO: Verify CASCADE.
+                     "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")
 
         #TODO: if a match was conducted in a stadium and the stadium was deleted the match should be deleted
         conn.execute("CREATE TABLE InStadium(MatchID INTEGER NOT NULL PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
@@ -214,7 +212,7 @@ def getMatchProfile(matchID: int) -> Match:
     finally:
         conn.close()
 
-
+#TODO: should delete all the match attributes?
 def deleteMatch(match: Match) -> ReturnValue:
     conn = None
     try:
@@ -293,7 +291,6 @@ def getPlayerProfile(playerID: int) -> Player:
 
 
 def deletePlayer(player: Player) -> ReturnValue:
-    # TODO: Check cascading with ScoreIn
     conn = None
     try:
         conn = Connector.DBConnector()
@@ -371,7 +368,6 @@ def getStadiumProfile(stadiumID: int) -> Stadium:
 
 
 def deleteStadium(stadium: Stadium) -> ReturnValue:
-    # TODO: Check cascading with InStadium
     conn = None
     try:
         conn = Connector.DBConnector()
@@ -725,7 +721,6 @@ def mostGoalsForTeam(teamID: int) -> List[int]:
     finally:
         conn.close()
 
-# TODO: NOT CHECKED YET
 # TODO: maybe we should use views here
 def getClosePlayers(playerID: int) -> List[int]:
     conn = None

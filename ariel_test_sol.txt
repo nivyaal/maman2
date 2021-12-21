@@ -1,0 +1,1019 @@
+--------- SET UP - START ---------
+ADDING TEAMS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.BAD_PARAMS
+ReturnValue.ALREADY_EXISTS
+ADDING MATCHES
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.BAD_PARAMS
+ReturnValue.ALREADY_EXISTS
+ReturnValue.ALREADY_EXISTS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ADDING PLAYERS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ReturnValue.BAD_PARAMS
+ADDING STADIUMS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.ALREADY_EXISTS
+ReturnValue.ALREADY_EXISTS
+ReturnValue.ALREADY_EXISTS
+GETTING MATCH PROFILES
+MatchID=1, competition=Domestic, home team=1, away team=2
+MatchID=2, competition=International, home team=1, away team=3
+MatchID=3, competition=International, home team=1, away team=4
+MatchID=4, competition=Domestic, home team=1, away team=5
+MatchID=5, competition=Domestic, home team=1, away team=6
+MatchID=6, competition=International, home team=2, away team=3
+MatchID=7, competition=International, home team=2, away team=4
+MatchID=8, competition=International, home team=2, away team=1
+MatchID=9, competition=International, home team=3, away team=4
+MatchID=10, competition=International, home team=3, away team=5
+MatchID=11, competition=International, home team=3, away team=6
+MatchID=12, competition=International, home team=1, away team=10
+MatchID=13, competition=International, home team=6, away team=7
+MatchID=14, competition=International, home team=7, away team=8
+MatchID=15, competition=Domestic, home team=1, away team=2
+MatchID=None, competition=None, home team=None, away team=None
+MatchID=1, competition=Domestic, home team=1, away team=2
+MatchID=1, competition=Domestic, home team=1, away team=2
+MatchID=None, competition=None, home team=None, away team=None
+MatchID=None, competition=None, home team=None, away team=None
+MatchID=None, competition=None, home team=None, away team=None
+MatchID=None, competition=None, home team=None, away team=None
+MatchID=None, competition=None, home team=None, away team=None
+GETTING PLAYER PROFILES
+PlayerID=1, TeamID=1, age=10, height=150, foot=Left
+PlayerID=2, TeamID=1, age=10, height=191, foot=Left
+PlayerID=3, TeamID=1, age=11, height=190, foot=Left
+PlayerID=4, TeamID=1, age=22, height=170, foot=Left
+PlayerID=5, TeamID=1, age=23, height=160, foot=Right
+PlayerID=6, TeamID=2, age=10, height=200, foot=Left
+PlayerID=7, TeamID=2, age=10, height=130, foot=Left
+PlayerID=8, TeamID=2, age=10, height=200, foot=Left
+PlayerID=9, TeamID=2, age=11, height=200, foot=Left
+PlayerID=10, TeamID=3, age=11, height=180, foot=Left
+PlayerID=11, TeamID=3, age=11, height=184, foot=Left
+PlayerID=12, TeamID=4, age=11, height=165, foot=Right
+PlayerID=13, TeamID=4, age=11, height=200, foot=Left
+PlayerID=14, TeamID=5, age=11, height=200, foot=Right
+PlayerID=15, TeamID=5, age=11, height=135, foot=Right
+PlayerID=16, TeamID=5, age=11, height=200, foot=Left
+PlayerID=17, TeamID=9, age=11, height=200, foot=Right
+PlayerID=18, TeamID=6, age=11, height=180, foot=Left
+PlayerID=19, TeamID=7, age=11, height=180, foot=Left
+PlayerID=20, TeamID=8, age=11, height=180, foot=Left
+PlayerID=21, TeamID=10, age=11, height=200, foot=Left
+PlayerID=22, TeamID=10, age=11, height=200, foot=Left
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+PlayerID=None, TeamID=None, age=None, height=None, foot=None
+GETTING STADIUM PROFILES
+stadiumID=1, capacity=1, belongs to=1
+stadiumID=2, capacity=2, belongs to=2
+stadiumID=5, capacity=5, belongs to=None
+stadiumID=6, capacity=60000, belongs to=5
+stadiumID=7, capacity=60000, belongs to=4
+stadiumID=8, capacity=100000, belongs to=3
+stadiumID=9, capacity=100000, belongs to=6
+stadiumID=10, capacity=99999, belongs to=7
+stadiumID=None, capacity=None, belongs to=None
+stadiumID=None, capacity=None, belongs to=None
+stadiumID=1, capacity=1, belongs to=1
+--------- SET UP - END ---------
+--------- API TESTING - START ---------
+ADDING PLAYER SCORES
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.BAD_PARAMS
+ADDING MATCH IN STADIUMS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+ReturnValue.BAD_PARAMS
+ReturnValue.ALREADY_EXISTS
+GETTING AVERAGE ATTENDANCE IN STADIUMS
+AVERAGE ATTENDANCE IN STADIUM 1: 45000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 2: 23000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 5: 0
+AVERAGE ATTENDANCE IN STADIUM 6: 21000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 7: 50000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 8: 29000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 9: 98999.500000000000
+AVERAGE ATTENDANCE IN STADIUM 10: 114000.000000000000
+AVERAGE ATTENDANCE IN STADIUM 3: 0
+AVERAGE ATTENDANCE IN STADIUM 4: 0
+AVERAGE ATTENDANCE IN STADIUM 1: 45000.000000000000
+GETTING TOTAL GOALS IN STADIUMS
+TOTAL GOALS IN STADIUM 1: 10
+TOTAL GOALS IN STADIUM 2: 0
+TOTAL GOALS IN STADIUM 5: 0
+TOTAL GOALS IN STADIUM 6: 6
+TOTAL GOALS IN STADIUM 7: 0
+TOTAL GOALS IN STADIUM 8: 5
+TOTAL GOALS IN STADIUM 9: 2
+TOTAL GOALS IN STADIUM 10: 0
+TOTAL GOALS IN STADIUM 3: 0
+TOTAL GOALS IN STADIUM 4: 0
+TOTAL GOALS IN STADIUM 1: 10
+CHECKING FOR WINNERS
+Player 1 in Match 1 is a winner: False
+Player 1 in Match 2 is a winner: False
+Player 1 in Match 3 is a winner: False
+Player 1 in Match 4 is a winner: False
+Player 1 in Match 5 is a winner: False
+Player 1 in Match 6 is a winner: False
+Player 1 in Match 7 is a winner: False
+Player 1 in Match 8 is a winner: False
+Player 1 in Match 9 is a winner: False
+Player 1 in Match 10 is a winner: False
+Player 1 in Match 11 is a winner: False
+Player 1 in Match 12 is a winner: False
+Player 1 in Match 13 is a winner: False
+Player 1 in Match 14 is a winner: False
+Player 1 in Match 15 is a winner: False
+Player 1 in Match 100 is a winner: False
+Player 1 in Match 1 is a winner: False
+Player 1 in Match 1 is a winner: False
+Player 1 in Match 101 is a winner: False
+Player 1 in Match None is a winner: False
+Player 1 in Match 100 is a winner: False
+Player 1 in Match 100 is a winner: False
+Player 1 in Match 100 is a winner: False
+Player 2 in Match 1 is a winner: True
+Player 2 in Match 2 is a winner: False
+Player 2 in Match 3 is a winner: False
+Player 2 in Match 4 is a winner: True
+Player 2 in Match 5 is a winner: False
+Player 2 in Match 6 is a winner: False
+Player 2 in Match 7 is a winner: False
+Player 2 in Match 8 is a winner: False
+Player 2 in Match 9 is a winner: False
+Player 2 in Match 10 is a winner: False
+Player 2 in Match 11 is a winner: False
+Player 2 in Match 12 is a winner: False
+Player 2 in Match 13 is a winner: False
+Player 2 in Match 14 is a winner: False
+Player 2 in Match 15 is a winner: False
+Player 2 in Match 100 is a winner: False
+Player 2 in Match 1 is a winner: True
+Player 2 in Match 1 is a winner: True
+Player 2 in Match 101 is a winner: False
+Player 2 in Match None is a winner: False
+Player 2 in Match 100 is a winner: False
+Player 2 in Match 100 is a winner: False
+Player 2 in Match 100 is a winner: False
+Player 3 in Match 1 is a winner: False
+Player 3 in Match 2 is a winner: False
+Player 3 in Match 3 is a winner: False
+Player 3 in Match 4 is a winner: True
+Player 3 in Match 5 is a winner: False
+Player 3 in Match 6 is a winner: True
+Player 3 in Match 7 is a winner: False
+Player 3 in Match 8 is a winner: True
+Player 3 in Match 9 is a winner: False
+Player 3 in Match 10 is a winner: False
+Player 3 in Match 11 is a winner: False
+Player 3 in Match 12 is a winner: False
+Player 3 in Match 13 is a winner: False
+Player 3 in Match 14 is a winner: False
+Player 3 in Match 15 is a winner: True
+Player 3 in Match 100 is a winner: False
+Player 3 in Match 1 is a winner: False
+Player 3 in Match 1 is a winner: False
+Player 3 in Match 101 is a winner: False
+Player 3 in Match None is a winner: False
+Player 3 in Match 100 is a winner: False
+Player 3 in Match 100 is a winner: False
+Player 3 in Match 100 is a winner: False
+Player 4 in Match 1 is a winner: False
+Player 4 in Match 2 is a winner: False
+Player 4 in Match 3 is a winner: False
+Player 4 in Match 4 is a winner: False
+Player 4 in Match 5 is a winner: False
+Player 4 in Match 6 is a winner: False
+Player 4 in Match 7 is a winner: False
+Player 4 in Match 8 is a winner: False
+Player 4 in Match 9 is a winner: False
+Player 4 in Match 10 is a winner: False
+Player 4 in Match 11 is a winner: False
+Player 4 in Match 12 is a winner: False
+Player 4 in Match 13 is a winner: False
+Player 4 in Match 14 is a winner: False
+Player 4 in Match 15 is a winner: False
+Player 4 in Match 100 is a winner: False
+Player 4 in Match 1 is a winner: False
+Player 4 in Match 1 is a winner: False
+Player 4 in Match 101 is a winner: False
+Player 4 in Match None is a winner: False
+Player 4 in Match 100 is a winner: False
+Player 4 in Match 100 is a winner: False
+Player 4 in Match 100 is a winner: False
+Player 5 in Match 1 is a winner: False
+Player 5 in Match 2 is a winner: False
+Player 5 in Match 3 is a winner: False
+Player 5 in Match 4 is a winner: False
+Player 5 in Match 5 is a winner: False
+Player 5 in Match 6 is a winner: False
+Player 5 in Match 7 is a winner: False
+Player 5 in Match 8 is a winner: False
+Player 5 in Match 9 is a winner: False
+Player 5 in Match 10 is a winner: False
+Player 5 in Match 11 is a winner: False
+Player 5 in Match 12 is a winner: False
+Player 5 in Match 13 is a winner: False
+Player 5 in Match 14 is a winner: False
+Player 5 in Match 15 is a winner: False
+Player 5 in Match 100 is a winner: False
+Player 5 in Match 1 is a winner: False
+Player 5 in Match 1 is a winner: False
+Player 5 in Match 101 is a winner: False
+Player 5 in Match None is a winner: False
+Player 5 in Match 100 is a winner: False
+Player 5 in Match 100 is a winner: False
+Player 5 in Match 100 is a winner: False
+Player 6 in Match 1 is a winner: False
+Player 6 in Match 2 is a winner: False
+Player 6 in Match 3 is a winner: False
+Player 6 in Match 4 is a winner: False
+Player 6 in Match 5 is a winner: False
+Player 6 in Match 6 is a winner: False
+Player 6 in Match 7 is a winner: False
+Player 6 in Match 8 is a winner: False
+Player 6 in Match 9 is a winner: False
+Player 6 in Match 10 is a winner: False
+Player 6 in Match 11 is a winner: False
+Player 6 in Match 12 is a winner: False
+Player 6 in Match 13 is a winner: False
+Player 6 in Match 14 is a winner: False
+Player 6 in Match 15 is a winner: False
+Player 6 in Match 100 is a winner: False
+Player 6 in Match 1 is a winner: False
+Player 6 in Match 1 is a winner: False
+Player 6 in Match 101 is a winner: False
+Player 6 in Match None is a winner: False
+Player 6 in Match 100 is a winner: False
+Player 6 in Match 100 is a winner: False
+Player 6 in Match 100 is a winner: False
+Player 7 in Match 1 is a winner: False
+Player 7 in Match 2 is a winner: False
+Player 7 in Match 3 is a winner: False
+Player 7 in Match 4 is a winner: False
+Player 7 in Match 5 is a winner: False
+Player 7 in Match 6 is a winner: False
+Player 7 in Match 7 is a winner: False
+Player 7 in Match 8 is a winner: False
+Player 7 in Match 9 is a winner: False
+Player 7 in Match 10 is a winner: False
+Player 7 in Match 11 is a winner: False
+Player 7 in Match 12 is a winner: False
+Player 7 in Match 13 is a winner: False
+Player 7 in Match 14 is a winner: False
+Player 7 in Match 15 is a winner: False
+Player 7 in Match 100 is a winner: False
+Player 7 in Match 1 is a winner: False
+Player 7 in Match 1 is a winner: False
+Player 7 in Match 101 is a winner: False
+Player 7 in Match None is a winner: False
+Player 7 in Match 100 is a winner: False
+Player 7 in Match 100 is a winner: False
+Player 7 in Match 100 is a winner: False
+Player 8 in Match 1 is a winner: False
+Player 8 in Match 2 is a winner: False
+Player 8 in Match 3 is a winner: False
+Player 8 in Match 4 is a winner: False
+Player 8 in Match 5 is a winner: False
+Player 8 in Match 6 is a winner: False
+Player 8 in Match 7 is a winner: False
+Player 8 in Match 8 is a winner: False
+Player 8 in Match 9 is a winner: False
+Player 8 in Match 10 is a winner: False
+Player 8 in Match 11 is a winner: False
+Player 8 in Match 12 is a winner: False
+Player 8 in Match 13 is a winner: False
+Player 8 in Match 14 is a winner: False
+Player 8 in Match 15 is a winner: False
+Player 8 in Match 100 is a winner: False
+Player 8 in Match 1 is a winner: False
+Player 8 in Match 1 is a winner: False
+Player 8 in Match 101 is a winner: False
+Player 8 in Match None is a winner: False
+Player 8 in Match 100 is a winner: False
+Player 8 in Match 100 is a winner: False
+Player 8 in Match 100 is a winner: False
+Player 9 in Match 1 is a winner: False
+Player 9 in Match 2 is a winner: False
+Player 9 in Match 3 is a winner: False
+Player 9 in Match 4 is a winner: False
+Player 9 in Match 5 is a winner: False
+Player 9 in Match 6 is a winner: False
+Player 9 in Match 7 is a winner: False
+Player 9 in Match 8 is a winner: False
+Player 9 in Match 9 is a winner: False
+Player 9 in Match 10 is a winner: False
+Player 9 in Match 11 is a winner: False
+Player 9 in Match 12 is a winner: False
+Player 9 in Match 13 is a winner: False
+Player 9 in Match 14 is a winner: False
+Player 9 in Match 15 is a winner: False
+Player 9 in Match 100 is a winner: False
+Player 9 in Match 1 is a winner: False
+Player 9 in Match 1 is a winner: False
+Player 9 in Match 101 is a winner: False
+Player 9 in Match None is a winner: False
+Player 9 in Match 100 is a winner: False
+Player 9 in Match 100 is a winner: False
+Player 9 in Match 100 is a winner: False
+Player 10 in Match 1 is a winner: False
+Player 10 in Match 2 is a winner: True
+Player 10 in Match 3 is a winner: False
+Player 10 in Match 4 is a winner: False
+Player 10 in Match 5 is a winner: False
+Player 10 in Match 6 is a winner: False
+Player 10 in Match 7 is a winner: False
+Player 10 in Match 8 is a winner: False
+Player 10 in Match 9 is a winner: False
+Player 10 in Match 10 is a winner: False
+Player 10 in Match 11 is a winner: False
+Player 10 in Match 12 is a winner: False
+Player 10 in Match 13 is a winner: False
+Player 10 in Match 14 is a winner: False
+Player 10 in Match 15 is a winner: False
+Player 10 in Match 100 is a winner: False
+Player 10 in Match 1 is a winner: False
+Player 10 in Match 1 is a winner: False
+Player 10 in Match 101 is a winner: False
+Player 10 in Match None is a winner: False
+Player 10 in Match 100 is a winner: False
+Player 10 in Match 100 is a winner: False
+Player 10 in Match 100 is a winner: False
+Player 11 in Match 1 is a winner: False
+Player 11 in Match 2 is a winner: False
+Player 11 in Match 3 is a winner: False
+Player 11 in Match 4 is a winner: False
+Player 11 in Match 5 is a winner: False
+Player 11 in Match 6 is a winner: False
+Player 11 in Match 7 is a winner: False
+Player 11 in Match 8 is a winner: False
+Player 11 in Match 9 is a winner: False
+Player 11 in Match 10 is a winner: True
+Player 11 in Match 11 is a winner: True
+Player 11 in Match 12 is a winner: False
+Player 11 in Match 13 is a winner: False
+Player 11 in Match 14 is a winner: False
+Player 11 in Match 15 is a winner: False
+Player 11 in Match 100 is a winner: False
+Player 11 in Match 1 is a winner: False
+Player 11 in Match 1 is a winner: False
+Player 11 in Match 101 is a winner: False
+Player 11 in Match None is a winner: False
+Player 11 in Match 100 is a winner: False
+Player 11 in Match 100 is a winner: False
+Player 11 in Match 100 is a winner: False
+Player 12 in Match 1 is a winner: False
+Player 12 in Match 2 is a winner: False
+Player 12 in Match 3 is a winner: False
+Player 12 in Match 4 is a winner: False
+Player 12 in Match 5 is a winner: False
+Player 12 in Match 6 is a winner: False
+Player 12 in Match 7 is a winner: False
+Player 12 in Match 8 is a winner: False
+Player 12 in Match 9 is a winner: False
+Player 12 in Match 10 is a winner: False
+Player 12 in Match 11 is a winner: False
+Player 12 in Match 12 is a winner: False
+Player 12 in Match 13 is a winner: False
+Player 12 in Match 14 is a winner: False
+Player 12 in Match 15 is a winner: False
+Player 12 in Match 100 is a winner: False
+Player 12 in Match 1 is a winner: False
+Player 12 in Match 1 is a winner: False
+Player 12 in Match 101 is a winner: False
+Player 12 in Match None is a winner: False
+Player 12 in Match 100 is a winner: False
+Player 12 in Match 100 is a winner: False
+Player 12 in Match 100 is a winner: False
+Player 13 in Match 1 is a winner: False
+Player 13 in Match 2 is a winner: False
+Player 13 in Match 3 is a winner: True
+Player 13 in Match 4 is a winner: False
+Player 13 in Match 5 is a winner: False
+Player 13 in Match 6 is a winner: False
+Player 13 in Match 7 is a winner: False
+Player 13 in Match 8 is a winner: False
+Player 13 in Match 9 is a winner: False
+Player 13 in Match 10 is a winner: False
+Player 13 in Match 11 is a winner: False
+Player 13 in Match 12 is a winner: False
+Player 13 in Match 13 is a winner: False
+Player 13 in Match 14 is a winner: False
+Player 13 in Match 15 is a winner: False
+Player 13 in Match 100 is a winner: False
+Player 13 in Match 1 is a winner: False
+Player 13 in Match 1 is a winner: False
+Player 13 in Match 101 is a winner: False
+Player 13 in Match None is a winner: False
+Player 13 in Match 100 is a winner: False
+Player 13 in Match 100 is a winner: False
+Player 13 in Match 100 is a winner: False
+Player 14 in Match 1 is a winner: False
+Player 14 in Match 2 is a winner: False
+Player 14 in Match 3 is a winner: False
+Player 14 in Match 4 is a winner: False
+Player 14 in Match 5 is a winner: False
+Player 14 in Match 6 is a winner: False
+Player 14 in Match 7 is a winner: False
+Player 14 in Match 8 is a winner: False
+Player 14 in Match 9 is a winner: False
+Player 14 in Match 10 is a winner: False
+Player 14 in Match 11 is a winner: False
+Player 14 in Match 12 is a winner: False
+Player 14 in Match 13 is a winner: False
+Player 14 in Match 14 is a winner: False
+Player 14 in Match 15 is a winner: False
+Player 14 in Match 100 is a winner: False
+Player 14 in Match 1 is a winner: False
+Player 14 in Match 1 is a winner: False
+Player 14 in Match 101 is a winner: False
+Player 14 in Match None is a winner: False
+Player 14 in Match 100 is a winner: False
+Player 14 in Match 100 is a winner: False
+Player 14 in Match 100 is a winner: False
+Player 15 in Match 1 is a winner: False
+Player 15 in Match 2 is a winner: False
+Player 15 in Match 3 is a winner: False
+Player 15 in Match 4 is a winner: False
+Player 15 in Match 5 is a winner: False
+Player 15 in Match 6 is a winner: False
+Player 15 in Match 7 is a winner: False
+Player 15 in Match 8 is a winner: False
+Player 15 in Match 9 is a winner: False
+Player 15 in Match 10 is a winner: False
+Player 15 in Match 11 is a winner: False
+Player 15 in Match 12 is a winner: False
+Player 15 in Match 13 is a winner: False
+Player 15 in Match 14 is a winner: False
+Player 15 in Match 15 is a winner: False
+Player 15 in Match 100 is a winner: False
+Player 15 in Match 1 is a winner: False
+Player 15 in Match 1 is a winner: False
+Player 15 in Match 101 is a winner: False
+Player 15 in Match None is a winner: False
+Player 15 in Match 100 is a winner: False
+Player 15 in Match 100 is a winner: False
+Player 15 in Match 100 is a winner: False
+Player 16 in Match 1 is a winner: False
+Player 16 in Match 2 is a winner: False
+Player 16 in Match 3 is a winner: False
+Player 16 in Match 4 is a winner: False
+Player 16 in Match 5 is a winner: False
+Player 16 in Match 6 is a winner: False
+Player 16 in Match 7 is a winner: False
+Player 16 in Match 8 is a winner: False
+Player 16 in Match 9 is a winner: False
+Player 16 in Match 10 is a winner: False
+Player 16 in Match 11 is a winner: False
+Player 16 in Match 12 is a winner: False
+Player 16 in Match 13 is a winner: False
+Player 16 in Match 14 is a winner: False
+Player 16 in Match 15 is a winner: False
+Player 16 in Match 100 is a winner: False
+Player 16 in Match 1 is a winner: False
+Player 16 in Match 1 is a winner: False
+Player 16 in Match 101 is a winner: False
+Player 16 in Match None is a winner: False
+Player 16 in Match 100 is a winner: False
+Player 16 in Match 100 is a winner: False
+Player 16 in Match 100 is a winner: False
+Player 17 in Match 1 is a winner: False
+Player 17 in Match 2 is a winner: False
+Player 17 in Match 3 is a winner: False
+Player 17 in Match 4 is a winner: False
+Player 17 in Match 5 is a winner: False
+Player 17 in Match 6 is a winner: False
+Player 17 in Match 7 is a winner: False
+Player 17 in Match 8 is a winner: False
+Player 17 in Match 9 is a winner: False
+Player 17 in Match 10 is a winner: False
+Player 17 in Match 11 is a winner: False
+Player 17 in Match 12 is a winner: False
+Player 17 in Match 13 is a winner: False
+Player 17 in Match 14 is a winner: False
+Player 17 in Match 15 is a winner: False
+Player 17 in Match 100 is a winner: False
+Player 17 in Match 1 is a winner: False
+Player 17 in Match 1 is a winner: False
+Player 17 in Match 101 is a winner: False
+Player 17 in Match None is a winner: False
+Player 17 in Match 100 is a winner: False
+Player 17 in Match 100 is a winner: False
+Player 17 in Match 100 is a winner: False
+Player 18 in Match 1 is a winner: False
+Player 18 in Match 2 is a winner: False
+Player 18 in Match 3 is a winner: False
+Player 18 in Match 4 is a winner: False
+Player 18 in Match 5 is a winner: True
+Player 18 in Match 6 is a winner: False
+Player 18 in Match 7 is a winner: False
+Player 18 in Match 8 is a winner: False
+Player 18 in Match 9 is a winner: False
+Player 18 in Match 10 is a winner: False
+Player 18 in Match 11 is a winner: False
+Player 18 in Match 12 is a winner: False
+Player 18 in Match 13 is a winner: False
+Player 18 in Match 14 is a winner: False
+Player 18 in Match 15 is a winner: False
+Player 18 in Match 100 is a winner: False
+Player 18 in Match 1 is a winner: False
+Player 18 in Match 1 is a winner: False
+Player 18 in Match 101 is a winner: False
+Player 18 in Match None is a winner: False
+Player 18 in Match 100 is a winner: False
+Player 18 in Match 100 is a winner: False
+Player 18 in Match 100 is a winner: False
+Player 19 in Match 1 is a winner: False
+Player 19 in Match 2 is a winner: False
+Player 19 in Match 3 is a winner: False
+Player 19 in Match 4 is a winner: False
+Player 19 in Match 5 is a winner: False
+Player 19 in Match 6 is a winner: False
+Player 19 in Match 7 is a winner: False
+Player 19 in Match 8 is a winner: False
+Player 19 in Match 9 is a winner: False
+Player 19 in Match 10 is a winner: False
+Player 19 in Match 11 is a winner: False
+Player 19 in Match 12 is a winner: False
+Player 19 in Match 13 is a winner: False
+Player 19 in Match 14 is a winner: False
+Player 19 in Match 15 is a winner: False
+Player 19 in Match 100 is a winner: False
+Player 19 in Match 1 is a winner: False
+Player 19 in Match 1 is a winner: False
+Player 19 in Match 101 is a winner: False
+Player 19 in Match None is a winner: False
+Player 19 in Match 100 is a winner: False
+Player 19 in Match 100 is a winner: False
+Player 19 in Match 100 is a winner: False
+Player 20 in Match 1 is a winner: False
+Player 20 in Match 2 is a winner: False
+Player 20 in Match 3 is a winner: False
+Player 20 in Match 4 is a winner: False
+Player 20 in Match 5 is a winner: False
+Player 20 in Match 6 is a winner: False
+Player 20 in Match 7 is a winner: False
+Player 20 in Match 8 is a winner: False
+Player 20 in Match 9 is a winner: False
+Player 20 in Match 10 is a winner: False
+Player 20 in Match 11 is a winner: False
+Player 20 in Match 12 is a winner: False
+Player 20 in Match 13 is a winner: False
+Player 20 in Match 14 is a winner: False
+Player 20 in Match 15 is a winner: False
+Player 20 in Match 100 is a winner: False
+Player 20 in Match 1 is a winner: False
+Player 20 in Match 1 is a winner: False
+Player 20 in Match 101 is a winner: False
+Player 20 in Match None is a winner: False
+Player 20 in Match 100 is a winner: False
+Player 20 in Match 100 is a winner: False
+Player 20 in Match 100 is a winner: False
+Player 21 in Match 1 is a winner: False
+Player 21 in Match 2 is a winner: False
+Player 21 in Match 3 is a winner: False
+Player 21 in Match 4 is a winner: False
+Player 21 in Match 5 is a winner: False
+Player 21 in Match 6 is a winner: False
+Player 21 in Match 7 is a winner: False
+Player 21 in Match 8 is a winner: False
+Player 21 in Match 9 is a winner: False
+Player 21 in Match 10 is a winner: False
+Player 21 in Match 11 is a winner: False
+Player 21 in Match 12 is a winner: False
+Player 21 in Match 13 is a winner: False
+Player 21 in Match 14 is a winner: False
+Player 21 in Match 15 is a winner: False
+Player 21 in Match 100 is a winner: False
+Player 21 in Match 1 is a winner: False
+Player 21 in Match 1 is a winner: False
+Player 21 in Match 101 is a winner: False
+Player 21 in Match None is a winner: False
+Player 21 in Match 100 is a winner: False
+Player 21 in Match 100 is a winner: False
+Player 21 in Match 100 is a winner: False
+Player 22 in Match 1 is a winner: False
+Player 22 in Match 2 is a winner: False
+Player 22 in Match 3 is a winner: False
+Player 22 in Match 4 is a winner: False
+Player 22 in Match 5 is a winner: False
+Player 22 in Match 6 is a winner: False
+Player 22 in Match 7 is a winner: False
+Player 22 in Match 8 is a winner: False
+Player 22 in Match 9 is a winner: False
+Player 22 in Match 10 is a winner: False
+Player 22 in Match 11 is a winner: False
+Player 22 in Match 12 is a winner: False
+Player 22 in Match 13 is a winner: False
+Player 22 in Match 14 is a winner: False
+Player 22 in Match 15 is a winner: False
+Player 22 in Match 100 is a winner: False
+Player 22 in Match 1 is a winner: False
+Player 22 in Match 1 is a winner: False
+Player 22 in Match 101 is a winner: False
+Player 22 in Match None is a winner: False
+Player 22 in Match 100 is a winner: False
+Player 22 in Match 100 is a winner: False
+Player 22 in Match 100 is a winner: False
+Player 100 in Match 1 is a winner: False
+Player 100 in Match 2 is a winner: False
+Player 100 in Match 3 is a winner: False
+Player 100 in Match 4 is a winner: False
+Player 100 in Match 5 is a winner: False
+Player 100 in Match 6 is a winner: False
+Player 100 in Match 7 is a winner: False
+Player 100 in Match 8 is a winner: False
+Player 100 in Match 9 is a winner: False
+Player 100 in Match 10 is a winner: False
+Player 100 in Match 11 is a winner: False
+Player 100 in Match 12 is a winner: False
+Player 100 in Match 13 is a winner: False
+Player 100 in Match 14 is a winner: False
+Player 100 in Match 15 is a winner: False
+Player 100 in Match 100 is a winner: False
+Player 100 in Match 1 is a winner: False
+Player 100 in Match 1 is a winner: False
+Player 100 in Match 101 is a winner: False
+Player 100 in Match None is a winner: False
+Player 100 in Match 100 is a winner: False
+Player 100 in Match 100 is a winner: False
+Player 100 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 2 is a winner: False
+Player 101 in Match 3 is a winner: False
+Player 101 in Match 4 is a winner: False
+Player 101 in Match 5 is a winner: False
+Player 101 in Match 6 is a winner: False
+Player 101 in Match 7 is a winner: False
+Player 101 in Match 8 is a winner: False
+Player 101 in Match 9 is a winner: False
+Player 101 in Match 10 is a winner: False
+Player 101 in Match 11 is a winner: False
+Player 101 in Match 12 is a winner: False
+Player 101 in Match 13 is a winner: False
+Player 101 in Match 14 is a winner: False
+Player 101 in Match 15 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 101 is a winner: False
+Player 101 in Match None is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player None in Match 1 is a winner: False
+Player None in Match 2 is a winner: False
+Player None in Match 3 is a winner: False
+Player None in Match 4 is a winner: False
+Player None in Match 5 is a winner: False
+Player None in Match 6 is a winner: False
+Player None in Match 7 is a winner: False
+Player None in Match 8 is a winner: False
+Player None in Match 9 is a winner: False
+Player None in Match 10 is a winner: False
+Player None in Match 11 is a winner: False
+Player None in Match 12 is a winner: False
+Player None in Match 13 is a winner: False
+Player None in Match 14 is a winner: False
+Player None in Match 15 is a winner: False
+Player None in Match 100 is a winner: False
+Player None in Match 1 is a winner: False
+Player None in Match 1 is a winner: False
+Player None in Match 101 is a winner: False
+Player None in Match None is a winner: False
+Player None in Match 100 is a winner: False
+Player None in Match 100 is a winner: False
+Player None in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 2 is a winner: False
+Player 101 in Match 3 is a winner: False
+Player 101 in Match 4 is a winner: False
+Player 101 in Match 5 is a winner: False
+Player 101 in Match 6 is a winner: False
+Player 101 in Match 7 is a winner: False
+Player 101 in Match 8 is a winner: False
+Player 101 in Match 9 is a winner: False
+Player 101 in Match 10 is a winner: False
+Player 101 in Match 11 is a winner: False
+Player 101 in Match 12 is a winner: False
+Player 101 in Match 13 is a winner: False
+Player 101 in Match 14 is a winner: False
+Player 101 in Match 15 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 101 is a winner: False
+Player 101 in Match None is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 2 is a winner: False
+Player 101 in Match 3 is a winner: False
+Player 101 in Match 4 is a winner: False
+Player 101 in Match 5 is a winner: False
+Player 101 in Match 6 is a winner: False
+Player 101 in Match 7 is a winner: False
+Player 101 in Match 8 is a winner: False
+Player 101 in Match 9 is a winner: False
+Player 101 in Match 10 is a winner: False
+Player 101 in Match 11 is a winner: False
+Player 101 in Match 12 is a winner: False
+Player 101 in Match 13 is a winner: False
+Player 101 in Match 14 is a winner: False
+Player 101 in Match 15 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 101 is a winner: False
+Player 101 in Match None is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 2 is a winner: False
+Player 101 in Match 3 is a winner: False
+Player 101 in Match 4 is a winner: False
+Player 101 in Match 5 is a winner: False
+Player 101 in Match 6 is a winner: False
+Player 101 in Match 7 is a winner: False
+Player 101 in Match 8 is a winner: False
+Player 101 in Match 9 is a winner: False
+Player 101 in Match 10 is a winner: False
+Player 101 in Match 11 is a winner: False
+Player 101 in Match 12 is a winner: False
+Player 101 in Match 13 is a winner: False
+Player 101 in Match 14 is a winner: False
+Player 101 in Match 15 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 101 is a winner: False
+Player 101 in Match None is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 2 is a winner: False
+Player 101 in Match 3 is a winner: False
+Player 101 in Match 4 is a winner: False
+Player 101 in Match 5 is a winner: False
+Player 101 in Match 6 is a winner: False
+Player 101 in Match 7 is a winner: False
+Player 101 in Match 8 is a winner: False
+Player 101 in Match 9 is a winner: False
+Player 101 in Match 10 is a winner: False
+Player 101 in Match 11 is a winner: False
+Player 101 in Match 12 is a winner: False
+Player 101 in Match 13 is a winner: False
+Player 101 in Match 14 is a winner: False
+Player 101 in Match 15 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 1 is a winner: False
+Player 101 in Match 101 is a winner: False
+Player 101 in Match None is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+Player 101 in Match 100 is a winner: False
+GETTING TOP 5 TALL ACTIVE TEAMS
+[10, 5, 2]
+GETTING TOP 5 RICHEST TALL ACTIVE TEAMS
+[5]
+GETTING TOP 10 MOST POPULAR TEAMS
+[10, 9, 8, 7, 6, 5, 4]
+GETTING STADIUMS ORDERED BY ATTRACTIVENESS
+[1, 6, 8, 9, 2, 5, 7, 10]
+GETTING MOST GOALS PLAYER LIST PER TEAM
+Most goals list for team 1: [3, 2, 4, 5, 1]
+Most goals list for team 2: [9, 8, 7, 6]
+Most goals list for team 3: [10, 11]
+Most goals list for team 4: [13, 12]
+Most goals list for team 5: [16, 15, 14]
+Most goals list for team 6: [18]
+Most goals list for team 7: [19]
+Most goals list for team 8: [20]
+Most goals list for team 9: [17]
+Most goals list for team 10: [22, 21]
+Most goals list for team 0: []
+Most goals list for team 6: [18]
+GETTING MOST CLOSE PLAYERS PER PLAYER
+Most close players for player 1: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Most close players for player 2: [3]
+Most close players for player 3: []
+Most close players for player 4: [10]
+Most close players for player 5: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+Most close players for player 6: [1, 2, 3, 4, 5, 7, 8, 9, 10, 11]
+Most close players for player 7: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11]
+Most close players for player 8: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11]
+Most close players for player 9: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
+Most close players for player 10: [4]
+Most close players for player 11: []
+Most close players for player 12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 13: [2]
+Most close players for player 14: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 15: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 16: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 17: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 18: []
+Most close players for player 19: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 20: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 21: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Most close players for player 22: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+REMOVING PLAYER SCORES
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+REMOVING MATCHES IN STADIUMS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+--------- API TESTING - END ---------
+--------- TEAR DOWN - START ---------
+DELETING MATCHES
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+DELETING PLAYERS
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+DELETING STADIUM
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.OK
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+ReturnValue.NOT_EXISTS
+--------- TEAR DOWN - END ---------

@@ -96,6 +96,8 @@ if __name__ == '__main__':
     assert (matchInStadium(Match(2, None, None, None), Stadium(1, None, None), 0) == ReturnValue.OK)
     assert (matchInStadium(Match(3, None, None, None), Stadium(1, None, None), 0) == ReturnValue.NOT_EXISTS)
 
+
+
     assert(matchNotInStadium(Match(2, None, None, None), Stadium(1, None, None)) == ReturnValue.OK)
 
     # TODO: Verify that if the match is in a stadium, but not the given stadium, then NOT_EXISTS
