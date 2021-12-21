@@ -52,23 +52,23 @@ def createTables():
         # TODO: not sure about null?
         conn.execute("CREATE TABLE Player(PlayerID INTEGER PRIMARY KEY CHECK(PlayerID>0),"
                      "TeamID INTEGER NOT NULL REFERENCES Team(TeamID) ON DELETE CASCADE,"
-                     "Age INTEGER CHECK (Age>0),"
-                     "Height INTEGER CHECK (Height>0),"
+                     "Age INTEGER NOT NULL CHECK (Age>0),"
+                     "Height INTEGER NOT NULL CHECK (Height>0),"
                      "PreferredFoot VARCHAR(5) NOT NULL CHECK (PreferredFoot = 'Left' OR PreferredFoot = 'Right'));")
 
         # TODO: for each team only one stadium is allowed
         conn.execute("CREATE TABLE Stadium(StadiumID INTEGER PRIMARY KEY CHECK(StadiumID>0),"
-                     "Capacity INTEGER CHECK(Capacity>0),"
+                     "Capacity INTEGER NOT NULL CHECK(Capacity>0),"
                      "BelongTo INTEGER NULL UNIQUE REFERENCES Team(TeamID) ON DELETE CASCADE);")  # TODO: Verify CASCADE.
 
         #TODO: if a match was conducted in a stadium and the stadium was deleted the match should be deleted
         conn.execute("CREATE TABLE InStadium(MatchID INTEGER NOT NULL PRIMARY KEY REFERENCES Match(MatchID) ON DELETE CASCADE,"
                      "StadiumID INTEGER NOT NULL REFERENCES Stadium(StadiumID) ON DELETE CASCADE,"
-                     "Attendance INTEGER CHECK(Attendance>=0));")
+                     "Attendance INTEGER NOT NULL CHECK(Attendance>=0));")
 
         conn.execute("CREATE TABLE ScoreIn(MatchID INTEGER NOT NULL REFERENCES Match(MatchID) ON DELETE CASCADE,"
                      "PlayerID INTEGER NOT NULL REFERENCES Player(PlayerID) ON DELETE CASCADE,"
-                     "Amount INTEGER CHECK(Amount>0),"
+                     "Amount INTEGER NOT NULL CHECK(Amount>0),"
                      "PRIMARY KEY(MatchID, PlayerID));")
 
     except DatabaseException.ConnectionInvalid as e:
