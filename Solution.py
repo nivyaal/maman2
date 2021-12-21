@@ -498,9 +498,9 @@ def averageAttendanceInStadium(stadiumID: int) -> float:
     conn = None
     try:
         conn = Connector.DBConnector()
-        query = sql.SQL("SELECT AVG(Attendance) FROM InStadium WHERE StadiumID = {id};").format(id=sql.Literal(stadiumID))
+        query = sql.SQL("SELECT COALESCE(AVG(Attendance),0) AS avg FROM InStadium WHERE StadiumID = {id};").format(id=sql.Literal(stadiumID))
         _, result = conn.execute(query)
-        return result[0]['avg'] if result[0]['avg'] is not None else 0
+        return result[0]['avg']
     except DatabaseException.ConnectionInvalid as e:
         return -1
     except DatabaseException.NOT_NULL_VIOLATION as e:
@@ -522,10 +522,10 @@ def stadiumTotalGoals(stadiumID: int) -> int:
     try:
         conn = Connector.DBConnector()
         query = sql.SQL\
-            ("SELECT SUM(Amount) FROM ScoreIn WHERE MatchID IN "
+            ("SELECT COALESCE(SUM(Amount),0) AS goals FROM ScoreIn WHERE MatchID IN "
              "(SELECT MatchID FROM InStadium WHERE StadiumID = {id});").format(id=sql.Literal(stadiumID))
         _, result = conn.execute(query)
-        return result[0]['sum'] if result[0]['sum'] is not None else 0
+        return result[0]['goals'] #if result[0]['sum'] is not None else 0
     except DatabaseException.ConnectionInvalid as e:
         return -1
     except DatabaseException.NOT_NULL_VIOLATION as e:
@@ -666,8 +666,6 @@ def popularTeams() -> List[int]:
 
 
 # TODO: possible to add view of  stadiumTotalGoals
-# TODO: if no goals in the stadium i placed 0 for now
-# TODO: for all advanced querys need to check what is the value we put in case the list is not full
 def getMostAttractiveStadiums() -> List[int]:
     conn = None
     try:
