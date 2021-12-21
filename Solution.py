@@ -699,8 +699,6 @@ def getMostAttractiveStadiums() -> List[int]:
         conn.close()
 
 
-# TODO: if some of the five best didnt score at all i placed 0 for now
-# TODO: didnt checked will be checked in tests but similier to getMostAttractiveStadiums
 def mostGoalsForTeam(teamID: int) -> List[int]:
     conn = None
     try:
@@ -708,7 +706,7 @@ def mostGoalsForTeam(teamID: int) -> List[int]:
         query = sql.SQL \
             ("SELECT P.PlayerID ,COALESCE((SELECT SUM(Amount) FROM ScoreIn WHERE PlayerID = P.PlayerID), 0) AS Goals "
              "FROM Player P WHERE P.PlayerID IN (SELECT PlayerID FROM Player WHERE TeamID = {tid}) "
-             "ORDER BY Goals DESC, P.PlayerID ASC LIMIT 5;").\
+             "ORDER BY Goals DESC, P.PlayerID DESC LIMIT 5;").\
             format(tid=sql.Literal(teamID))
         _, result = conn.execute(query)
         return ([result[i]['playerid'] for i in range(result.size())])
@@ -737,7 +735,7 @@ def getClosePlayers(playerID: int) -> List[int]:
             ("SELECT P.PlayerID FROM Player AS P "
             "WHERE P.PlayerID <> {pid} "
             "AND ((SELECT COUNT(*) FROM ScoreIn WHERE PlayerID = {pid}) *0.5 "
-        	"< (SELECT COUNT(*) FROM ((SELECT MatchID FROM ScoreIn WHERE PlayerID = {pid}) "
+        	"<= (SELECT COUNT(*) FROM ((SELECT MatchID FROM ScoreIn WHERE PlayerID = {pid}) "
 							  "INTERSECT(SELECT MatchID FROM ScoreIn WHERE PlayerID = P.PlayerID)) AS X)) "
             "ORDER BY P.PlayerID ASC LIMIT 10;"). \
             format(pid=sql.Literal(playerID))
