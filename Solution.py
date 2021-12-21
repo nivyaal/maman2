@@ -69,10 +69,21 @@ def createTables():
                      "Amount INTEGER NOT NULL CHECK(Amount>0),"
                      "PRIMARY KEY(MatchID, PlayerID));")
 
+################## views#########################
         conn.execute("CREATE VIEW ActiveTallTeams as "
                      "SELECT TeamID FROM Player WHERE Height>190 "
                      "GROUP BY TeamID "
                      "Having COUNT(PlayerID) >= 2 AND TeamID IN ((SELECT HomeTeamID FROM Match) UNION (SELECT AwayTeamID FROM Match));")
+
+        conn.execute("CREATE VIEW PopularHomeTeams as "
+                     "SELECT M.HomeTeamID FROM Match AS M "
+                    "INNER JOIN InStadium AS I ON M.MatchID = I.MatchID "
+                    "GROUP BY M.HomeTeamID "
+                    "HAVING MIN(I.Attendance)>40000 ;")
+
+        conn.execute("CREATE VIEW NotHomeTeams as "
+                     "(SELECT TeamID FROM Team) EXCEPT (SELECT DISTINCT HomeTeamID FROM Match); ")
+
 
     except DatabaseException.ConnectionInvalid as e:
         print(e)
@@ -121,12 +132,15 @@ def dropTables():
     conn = None
     try:
         conn = Connector.DBConnector()
-        conn.execute("DROP TABLE IF EXISTS Team CASCADE;"
-                     "DROP TABLE IF EXISTS Match CASCADE;"
-                     "DROP TABLE IF EXISTS Player CASCADE;"
-                     "DROP TABLE IF EXISTS Stadium CASCADE;"
-                     "DROP TABLE IF EXISTS InStadium CASCADE;"
-                     "DROP TABLE IF EXISTS ScoreIn CASCADE;")
+        conn.execute("DROP VIEW IF EXISTS ActiveTallTeams; "
+                     "DROP VIEW IF EXISTS PopularHomeTeams; "
+                     "DROP VIEW IF EXISTS NotHomeTeams; "
+                     "DROP TABLE IF EXISTS Team CASCADE; "
+                     "DROP TABLE IF EXISTS Match CASCADE; "
+                     "DROP TABLE IF EXISTS Player CASCADE; "
+                     "DROP TABLE IF EXISTS Stadium CASCADE; "
+                     "DROP TABLE IF EXISTS InStadium CASCADE; "
+                     "DROP TABLE IF EXISTS ScoreIn CASCADE; ")
 
     except DatabaseException.ConnectionInvalid as e:
         print(e)
@@ -572,7 +586,6 @@ def playerIsWinner(playerID: int, matchID: int) -> bool:
         conn.close()
 
 
-#TODO: create a view
 def getActiveTallTeams() -> List[int]:
     conn = None
     try:
@@ -599,10 +612,7 @@ def getActiveTallTeams() -> List[int]:
     finally:
         conn.close()
 
-#TODO: possible to create a view of getActiveTallTeams without limit and order and then add the condition
-#TODO: adding the adjusted second version of the query form above?
 
-#TODO: use view from prev func
 def getActiveTallRichTeams() -> List[int]:
     conn = None
     try:
@@ -629,19 +639,16 @@ def getActiveTallRichTeams() -> List[int]:
     finally:
         conn.close()
 
-#TODO: what about temas who didnt played as hometeams
 def popularTeams() -> List[int]:
     conn = None
     try:
         conn = Connector.DBConnector()
         query = sql.SQL \
-            ("SELECT HomeTeamID FROM Match AS M "
-            "INNER JOIN InStadium AS I ON M.MatchID = I.MatchID "
-            "GROUP BY M.HomeTeamID "
-            "HAVING MIN(I.Attendance)>40000 "
-            "ORDER BY M.HomeTeamID DESC LIMIT 10;")
+            ("SELECT DISTINCT HomeTeamID AS TeamID "
+             "FROM (SELECT HomeTeamID FROM PopularHomeTeams UNION SELECT TeamID FROM NotHomeTeams) AS T "
+             "ORDER BY TeamID DESC;")
         _, result = conn.execute(query)
-        return ([result[i]['hometeamid'] for i in range(result.size())])
+        return ([result[i]['teamid'] for i in range(result.size())])
     except DatabaseException.ConnectionInvalid as e:
         return []
     except DatabaseException.NOT_NULL_VIOLATION as e:
@@ -658,7 +665,6 @@ def popularTeams() -> List[int]:
         conn.close()
 
 
-# TODO: use view from stadium total goals
 def getMostAttractiveStadiums() -> List[int]:
     conn = None
     try:
@@ -712,7 +718,6 @@ def mostGoalsForTeam(teamID: int) -> List[int]:
     finally:
         conn.close()
 
-# TODO: creating views
 def getClosePlayers(playerID: int) -> List[int]:
     conn = None
     try:
